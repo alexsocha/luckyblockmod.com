@@ -1,0 +1,32 @@
+{
+    "name": "luckyblock-website",
+    "version": "1.0.0",
+    "description": "The official Lucky Block website",
+    "main": "index.js",
+    "scripts": {
+        "build": "npx ts-node build.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/alexsocha/luckyblock-website.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/alexsocha/luckyblock-website/issues"
+    },
+    "homepage": "https://github.com/alexsocha/luckyblock-website#readme",
+    "devDependencies": {
+        "handlebars": "4.7.6",
+        "husky": "4.2.5",
+        "prettier": "2.0.5",
+        "pretty-quick": "2.0.1",
+        "ts-node": "8.10.2",
+        "typescript": "3.9.6"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    }
+}
