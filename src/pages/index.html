@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Minecraft Ascending - A place for Minecraft mods, maps, resourcepacks & more!</title>
-        <meta
-            name="description"
-            content="Minecraft Ascending - A place for Minecraft mods, maps, resourcepacks & more!"
-        />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="icon" type="image/x-icon" href="http://minecraftascending.com/favicon.ico" />
-        <script src="js/projects/scroll.js"></script>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Minecraft Ascending - A place for Minecraft mods, maps, resourcepacks & more!</title>
+    <meta
+        name="description"
+        content="Minecraft Ascending - A place for Minecraft mods, maps, resourcepacks & more!"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/x-icon" href="http://minecraftascending.com/favicon.ico" />
+    <script src="js/projects/scroll.js"></script>
+</head>
 
-    <body class="home" onscroll="scroll()">
-        <div class="homeContainer">
-            <!--#include virtual="global_html/nav_bar.html"-->
+<body class="home" onscroll="scroll()">
+    <div class="homeContainer">
+        {{> navbar }}
+        <div class="introHeader"></div>
 
-            <div class="introHeader"></div>
-
-            <div class="intro">
-                <div class="introIcon">
-                    <img src="images/projects/lucky_block/3d_lucky_block.png" />
-                </div>
-                <div class="introTitle">
-                    <h1>Minecraft Ascending</h1>
-                </div>
-                <div class="introHRuleWrapper">
-                    <div class="introHRule"></div>
-                </div>
-                <div class="introSubtitle">
-                    Home of the Lucky Block mod for Minecraft.
-                </div>
+        <div class="intro">
+            <div class="introIcon">
+                <img src="images/projects/lucky_block/3d_lucky_block.png" />
             </div>
-            <div class="pageInfoWrapper">
-                <p class="pageInfoText">
-                    © Copyright Minecraft Ascending
-                    <script>
-                        document.write(new Date().getFullYear());
-                    </script>
-                    . All rights reserved.
-                </p>
+            <div class="introTitle">
+                <h1>Minecraft Ascending</h1>
+            </div>
+            <div class="introHRuleWrapper">
+                <div class="introHRule"></div>
+            </div>
+            <div class="introSubtitle">
+                Home of the Lucky Block mod for Minecraft.
             </div>
         </div>
-    </body>
-</html>
+        <div class="pageInfoWrapper">
+            <p class="pageInfoText">
+                © Copyright Minecraft Ascending
+                <script>
+                    document.write(new Date().getFullYear());
+                </script>
+                . All rights reserved.
+            </p>
+        </div>
+    </div>
+    {{> analytics }}
+</body>
