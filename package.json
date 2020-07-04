@@ -19,10 +19,12 @@
     "homepage": "https://github.com/alexsocha/luckyblock-website#readme",
     "dependencies": {
         "glob": "7.1.6",
-        "handlebars": "4.7.6"
+        "handlebars": "4.7.6",
+        "js-yaml": "3.14.0"
     },
     "devDependencies": {
         "@types/glob": "7.1.2",
+        "@types/js-yaml": "3.12.5",
         "@types/ramda": "0.27.7",
         "husky": "4.2.5",
         "prettier": "2.0.5",
