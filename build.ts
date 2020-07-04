@@ -29,9 +29,19 @@ const generatePages = async () => {
     }
 };
 
+const copyStatic = async () => {
+    const filePaths = await globAsync('src/static/**/*.*');
+    for await (const filePath of filePaths) {
+        const publicPath = path.join(publicFolder, path.relative('src/static', filePath));
+        await fs.promises.mkdir(path.dirname(publicPath), { recursive: true });
+        await fs.promises.copyFile(filePath, publicPath);
+    }
+};
+
 const main = async () => {
     await registerPartials();
     await generatePages();
+    await copyStatic();
     const template = Handlebars.compile('hello {{> navbar }}');
     //console.log(template({ foo: 'test' }));
 };
