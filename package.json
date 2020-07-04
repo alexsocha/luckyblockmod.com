@@ -16,11 +16,17 @@
         "url": "https://github.com/alexsocha/luckyblock-website/issues"
     },
     "homepage": "https://github.com/alexsocha/luckyblock-website#readme",
+    "dependencies": {
+        "glob": "7.1.6",
+        "handlebars": "4.7.6"
+    },
     "devDependencies": {
-        "handlebars": "4.7.6",
+        "@types/glob": "7.1.2",
+        "@types/ramda": "0.27.7",
         "husky": "4.2.5",
         "prettier": "2.0.5",
         "pretty-quick": "2.0.1",
+        "ramda": "0.27.0",
         "ts-node": "8.10.2",
         "typescript": "3.9.6"
     },
