@@ -1,9 +1,4 @@
-var projectNames = [
-    'lucky_block',
-    'instant_massive_structures',
-    'cops_and_robbers',
-    'minecraft_challenges',
-];
+var projectNames = ['luckyblock'];
 
 if (document.referrer != null && document.referrer.indexOf('minecraftascending.com') == -1) {
     var documentName = location.pathname;
@@ -14,7 +9,5 @@ if (document.referrer != null && document.referrer.indexOf('minecraftascending.c
             break;
         }
     }
-    window.location.replace(
-        'http://www.minecraftascending.com/projects/' + projectName + '/' + projectName + '.html'
-    );
+    window.location.replace('/' + projectName + '/');
 }
