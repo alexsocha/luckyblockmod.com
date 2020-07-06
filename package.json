@@ -5,7 +5,9 @@
     "main": "index.js",
     "scripts": {
         "format": "npx prettier --write .",
-        "serve": "npx ts-node src/app.ts"
+        "build": "npx sass src/css:public/css",
+        "serve": "npx ts-node src/app.ts",
+        "watch": "nodemon -e '.' --exec npm run serve"
     },
     "repository": {
         "type": "git",
@@ -31,9 +33,11 @@
         "@types/js-yaml": "3.12.5",
         "@types/ramda": "0.27.7",
         "husky": "4.2.5",
+        "nodemon": "2.0.4",
         "prettier": "2.0.5",
         "pretty-quick": "2.0.1",
         "ramda": "0.27.0",
+        "sass": "1.26.9",
         "serve": "11.3.2",
         "ts-node": "8.10.2",
         "typescript": "3.9.6"

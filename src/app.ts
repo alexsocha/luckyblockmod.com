@@ -25,17 +25,17 @@ const readData = async (): Promise<{}> => {
 const app = express();
 const port = 8080;
 
-app.set('views', 'pages');
-app.use(express.static('static'));
+app.set('views', path.join(__dirname, 'pages'));
+app.use(express.static(path.join(__dirname, 'static')));
 
-app.set('view engine', 'html');
 app.engine(
     'html',
     handlebars({
-        partialsDir: 'partials',
+        partialsDir: path.join(__dirname, 'partials'),
         extname: 'html',
     })
 );
+app.engine('md', handlebars({ extname: 'md' }));
 
 readData().then((data) => {
     const templateData = { ...data, layout: false };
@@ -43,20 +43,24 @@ readData().then((data) => {
     app.get('/', (req, res) => {
         res.render('index.html', templateData);
     });
-    app.get('/luckyblock', (req, res) => {
-        res.render('luckyblock.html', templateData);
+    app.get('/info', (req, res) => {
+        res.render('info.html', templateData);
     });
-    app.get('/luckyblock/info', (req, res) => {
-        res.render('luckyblock/info.html', templateData);
+    app.get('/download', (req, res) => {
+        res.render('download.html', templateData);
     });
-    app.get('/luckyblock/download', (req, res) => {
-        res.render('luckyblock/download.html', templateData);
+    app.get('/download', (req, res) => {
+        res.render('download.html', templateData);
     });
-    app.get('/luckyblock/download', (req, res) => {
-        res.render('luckyblock/download.html', templateData);
+    app.get('/download/:version', (req, res) => {
+        res.render('download-version.html', templateData);
     });
-    app.get('/luckyblock/download/:version', (req, res) => {
-        res.render('luckyblock/download-version.html', templateData);
+
+    app.get('/docs', (req, res) => {
+        res.render('docs/index.html', templateData);
+    });
+    app.get('/docs/*.md', (req, res) => {
+        res.render(req.path.substring(1), templateData);
     });
 });
 

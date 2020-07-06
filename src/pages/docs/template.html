@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Lucky Block Docs</title>
+    <meta name="description" content="Lucky Block Docs" />
+    <link rel="stylesheet" href="../../../css/style.css?version=1.0.1" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <style>
+        .rawdocs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    {{> navbar }}
+    <div>
+        <iframe src="" id="rawdocs" class="rawdocs"></iframe>
+        <script>
+            console.log(window.location);
+            document.getElementById('rawdocs').src =
+                '/rawdocs/#' + window.location.pathname.substring('/docs'.length);
+        </script>
+        <div class="pageInfoWrapper">
+            <p class="pageInfoText">
+                © Copyright Minecraft Ascending
+                <script>
+                    document.write(new Date().getFullYear());
+                </script>
+                . All rights reserved.
+            </p>
+        </div>
+    </div>
+    {{> analytics }}
+</body>
