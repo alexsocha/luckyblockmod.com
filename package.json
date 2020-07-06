@@ -4,8 +4,8 @@
     "description": "The official Lucky Block website",
     "main": "index.js",
     "scripts": {
-        "build": "npx ts-node build.ts",
-        "serve": "npx ts-node app.ts"
+        "format": "npx prettier --write .",
+        "serve": "npx ts-node src/app.ts"
     },
     "repository": {
         "type": "git",

@@ -10,7 +10,7 @@ import { promisify } from 'util';
 const globAsync = promisify(glob);
 
 const readData = async (): Promise<{}> => {
-    const filePaths = await globAsync('src/data/**/*.yaml');
+    const filePaths = await globAsync('data/**/*.yaml');
     return await R.reduce(
         async (acc, filePath) => {
             const contents = await fs.promises.readFile(filePath, 'utf-8');
@@ -23,16 +23,16 @@ const readData = async (): Promise<{}> => {
 };
 
 const app = express();
-const port = 3000;
+const port = 8080;
 
-app.set('views', 'src/pages');
-app.use(express.static('src/static'));
+app.set('views', 'pages');
+app.use(express.static('static'));
 
 app.set('view engine', 'html');
 app.engine(
     'html',
     handlebars({
-        partialsDir: 'src/partials',
+        partialsDir: 'partials',
         extname: 'html',
     })
 );
