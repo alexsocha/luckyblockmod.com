@@ -1,3 +1,5 @@
+@use 'vars';
+
 html {
     font-size: 14px;
 }
@@ -10,9 +12,6 @@ hr.luckyblock {
     margin: 1em 0;
     padding: 0;
 }
-
-/* PAGE COLORS
-   ================================================== */
 
 html.luckyblock,
 body.luckyblock {
@@ -32,40 +31,6 @@ body.luckyblock {
 body .horizontalAdBox {
     border: 2px solid #c67c15;
 }
-
-/* HOME
-   ================================================== */
-
-body .homeContainer {
-    background-color: white;
-}
-
-body.home .introButton {
-    background-color: white;
-    color: #bb8844;
-    font-family: hero;
-}
-body.home .footerButton {
-    background-color: white;
-    color: #916934;
-    font-family: Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;
-}
-body.home .footerButton:hover {
-    font-family: Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;
-    background-color: #9ac963;
-}
-
-body.home .btn:hover,
-body .introButton:hover {
-    background-color: #9ac963;
-}
-body.home .pageInfoWrapper {
-    background-color: #ececec;
-    color: #aaaaaa;
-}
-
-/* LUCKY BLOCK
-   ================================================== */
 
 body.luckyblock .projectPageContainer {
     background-color: white;

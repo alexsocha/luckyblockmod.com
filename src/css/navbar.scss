@@ -1,19 +1,15 @@
-@use 'common';
+@use 'vars';
 
 .luckyblock.nav {
-    background-color: common.$primary-color;
+    background-color: vars.$primary-color;
 
-    height: 50px;
+    height: vars.$nav-height;
     position: fixed;
     width: 100%;
     z-index: 10;
     display: flex;
 
     box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.1);
-}
-
-.luckyblock.navSpacer {
-    height: 50px;
 }
 
 .luckyblock.nav {
@@ -24,14 +20,17 @@
         align-items: center;
     }
     .title {
-        font-family: common.$title-font;
+        font-family: vars.$title-font;
         color: white;
-        font-size: 30px;
+        font-size: 28px;
         padding-left: 20px;
     }
     .icon {
         padding-top: 4px;
         float: left;
+        img {
+            width: vars.$nav-height - 8;
+        }
     }
     .middle {
         flex: 0;
@@ -40,6 +39,10 @@
     }
     .right {
         flex: 1;
+        @media (max-width: vars.$breakpoint-nav) {
+            flex: 0;
+            background-color: red;
+        }
     }
     .sectionBtn {
         flex: 1;
@@ -50,11 +53,20 @@
 
         height: 100%;
         width: 110px;
-        border-bottom: 2px solid white;
         box-sizing: border-box;
         color: white;
-        font-family: common.$text-font;
+        font-family: vars.$text-font;
         font-weight: bold;
         font-size: 13px;
+
+        &.current {
+            border-bottom: 2px solid white;
+            padding-top: 2px;
+        }
+
+        &:hover {
+            color: transparentize(white, 0.3);
+        }
+        transition: color 0.2s;
     }
 }

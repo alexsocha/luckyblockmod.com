@@ -1,16 +1,16 @@
 <nav class="luckyblock nav">
     <div class="left">
         <div class="icon">
-            <img width="45px" src="/images/projects/lucky_block/lucky_block_title_icon_small.png" />
+            <img src="/images/projects/lucky_block/lucky_block_title_icon_small.png" />
         </div>
         <div class="title">
             Lucky Block
         </div>
     </div>
     <div class="middle">
-        <a class="sectionBtn" href="/">DOWNLOAD</a>
-        <a class="sectionBtn" href="/info/">INFO</a>
-        <a class="sectionBtn" href="/info/">DOCS</a>
+        <a class="sectionBtn{{#if download}} current{{/if}}" href="/">DOWNLOAD</a>
+        <a class="sectionBtn{{#if info}} current{{/if}}" href="/info/">INFO</a>
+        <a class="sectionBtn{{#if docs}} current{{/if}}" href="/docs/">DOCS</a>
     </div>
     <div class="right"></div>
 </nav>
