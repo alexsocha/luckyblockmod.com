@@ -5,9 +5,11 @@
     "main": "index.js",
     "scripts": {
         "format": "npx prettier --write .",
-        "build": "npx sass src/css:public/css",
+        "build-css": "npx sass src/css/style.scss public/style.css",
+        "watch-css": "npx sass --watch src/css/style.scss public/style.css",
+        "build": "npm run build-css",
         "serve": "npx ts-node src/app.ts",
-        "watch": "nodemon -e '.' --exec npm run serve"
+        "watch": "nodemon -e '.' --exec npm run build && npm run serve"
     },
     "repository": {
         "type": "git",
