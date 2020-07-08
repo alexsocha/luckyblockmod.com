@@ -1,8 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Mr+Dafoe&family=Open+Sans&family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mr+Dafoe&family=Open+Sans:wght@300;400&family=Quicksand:wght@300&display=swap');
 
-$title-font: 'Mr Dafoe', sans-serif;
-$text-font: 'Open Sans', sans-serif;
+$fancy-font: 'Mr Dafoe', sans-serif;
+$title-font: 'Quicksand', sans-serif;
+$font: 'Open Sans', sans-serif;
+
 $breakpoint-nav: 800px;
 $nav-height: 50px;
+$dark-gray: #444444;
+$gray: #aaaaaa;
+$white-gray: #ececec;
 
 $primary-color: #ffb347;
+$primary-text-color: darken($primary-color, 22%);

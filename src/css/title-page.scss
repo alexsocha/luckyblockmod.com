@@ -1,0 +1,204 @@
+@use 'vars';
+
+.luckyblock {
+    &.title-page {
+        min-width: 1020px;
+    }
+
+    // === common ===
+    .section-spacing {
+        position: relative;
+        right: 0;
+        left: 0;
+        margin-right: auto;
+        margin-left: auto;
+        width: 85%;
+        max-width: 1200px;
+        padding-bottom: 20px;
+    }
+    .section-title {
+        padding-top: 40px;
+        padding-bottom: 30px;
+        font-family: vars.$title-font;
+        font-weight: 300;
+        font-size: 35px;
+    }
+
+    .subtitle {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        color: vars.$primary-text-color;
+        font-family: vars.$title-font;
+        font-weight: 300;
+        font-size: 25px;
+    }
+
+    // === title section ===
+    .title-section {
+        padding-top: vars.$nav-height + 20;
+        width: 100%;
+        height: 350px;
+        background-color: vars.$white-gray;
+
+        .section-spacing {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .left {
+            height: 300px;
+            color: vars.$dark-gray;
+
+            .title-box {
+                display: inline-block;
+                padding-bottom: 10px;
+            }
+
+            .title {
+                padding-top: 50px;
+                p {
+                    font-weight: 300;
+                    font-family: vars.$title-font;
+                    font-size: 50px;
+                }
+            }
+            .hr {
+                height: 15px;
+                border-bottom: 1px solid vars.$gray;
+            }
+            .subtitle {
+                color: vars.$dark-gray;
+                padding-top: 15px;
+            }
+        }
+
+        .right {
+            width: 200px;
+            height: 200px;
+            padding-top: 30px;
+            margin-right: calc(40% - 400px);
+        }
+    }
+
+    // overview section
+    .overview-section {
+        .boxes {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 40px;
+        }
+
+        .box {
+            width: 250px;
+            min-height: 230px;
+            padding-right: 70px;
+
+            .btn {
+                align-self: start;
+            }
+            .text {
+                padding-bottom: 20px;
+            }
+        }
+    }
+
+    .description-section {
+        .text {
+            max-width: 550px;
+            padding-right: 50px;
+        }
+        .right {
+            object-fit: contain;
+        }
+        .img-box {
+            max-width: 450px;
+            width: 100%;
+        }
+    }
+
+    // === outcomes section ===
+    .outcomes-section {
+        .boxes {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 20px;
+        }
+        .box {
+            max-width: 300px;
+            padding-right: 50px;
+
+            .img-box {
+                width: 100%;
+            }
+            .text {
+                padding-top: 10px;
+            }
+
+            &:last-child {
+                padding-right: 0px;
+            }
+        }
+        .subtitle {
+        }
+    }
+
+    // === addon section ===
+    .addon-section {
+        margin-bottom: -50px;
+        //background-color: vars.$white-gray;
+        img {
+            max-width: 450px;
+        }
+
+        .boxes {
+            display: flex;
+        }
+
+        .box {
+            max-width: 250px;
+            padding-right: 50px;
+
+            &:last-child {
+                padding-right: 0px;
+            }
+            .top-bottom {
+                min-height: 120px;
+            }
+            .btn {
+                align-self: start;
+            }
+            .text {
+                padding-bottom: 20px;
+            }
+        }
+    }
+
+    .download-section {
+        .boxes {
+            flex: 1;
+            padding-top: 40px;
+            max-width: 1000px;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 40px;
+        }
+        img {
+            width: 150px;
+            height: 150px;
+        }
+        .box {
+            //width: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .multi-btn {
+            margin-right: 10px;
+            &:last-child {
+                margin-right: 0px;
+            }
+        }
+    }
+}

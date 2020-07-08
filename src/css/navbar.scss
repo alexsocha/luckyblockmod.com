@@ -20,7 +20,7 @@
         align-items: center;
     }
     .title {
-        font-family: vars.$title-font;
+        font-family: vars.$fancy-font;
         color: white;
         font-size: 28px;
         padding-left: 20px;
@@ -44,7 +44,7 @@
             background-color: red;
         }
     }
-    .sectionBtn {
+    .section-btn {
         flex: 1;
         display: flex;
         align-items: center;
@@ -55,7 +55,7 @@
         width: 110px;
         box-sizing: border-box;
         color: white;
-        font-family: vars.$text-font;
+        font-family: vars.$font;
         font-weight: bold;
         font-size: 13px;
 
