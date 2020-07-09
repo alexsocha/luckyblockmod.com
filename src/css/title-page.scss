@@ -1,9 +1,7 @@
 @use 'vars';
 
-.luckyblock {
-    &.title-page {
-        min-width: 1020px;
-    }
+.title-page {
+    min-width: 1020px;
 
     // === common ===
     .section-spacing {
@@ -17,20 +15,8 @@
         padding-bottom: 20px;
     }
     .section-title {
-        padding-top: 40px;
-        padding-bottom: 30px;
-        font-family: vars.$title-font;
-        font-weight: 300;
-        font-size: 35px;
-    }
-
-    .subtitle {
         padding-top: 20px;
-        padding-bottom: 20px;
-        color: vars.$primary-text-color;
-        font-family: vars.$title-font;
-        font-weight: 300;
-        font-size: 25px;
+        padding-bottom: 10px;
     }
 
     // === title section ===
@@ -56,19 +42,17 @@
 
             .title {
                 padding-top: 50px;
-                p {
-                    font-weight: 300;
-                    font-family: vars.$title-font;
-                    font-size: 50px;
-                }
+                font-weight: 300;
+                font-family: vars.$title-font;
+                font-size: 50px;
             }
             .hr {
                 height: 15px;
                 border-bottom: 1px solid vars.$gray;
             }
             .subtitle {
+                margin-top: 15px;
                 color: vars.$dark-gray;
-                padding-top: 15px;
             }
         }
 
@@ -95,9 +79,6 @@
 
             .btn {
                 align-self: start;
-            }
-            .text {
-                padding-bottom: 20px;
             }
         }
     }
@@ -151,25 +132,23 @@
             max-width: 450px;
         }
 
+        .boxes-spacing {
+            display: inline-block;
+        }
         .boxes {
             display: flex;
         }
-
         .box {
+            flex-height: 0;
             max-width: 250px;
+            min-height: 200px;
             padding-right: 50px;
 
             &:last-child {
                 padding-right: 0px;
             }
-            .top-bottom {
-                min-height: 120px;
-            }
             .btn {
                 align-self: start;
-            }
-            .text {
-                padding-bottom: 20px;
             }
         }
     }

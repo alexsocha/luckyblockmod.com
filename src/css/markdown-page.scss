@@ -1,0 +1,14 @@
+@use 'vars';
+
+.markdown-page {
+    .content-spacing {
+        display: flex;
+        justify-content: center;
+        padding-top: vars.$nav-height + 50;
+    }
+
+    .content {
+        flex: 1;
+        max-width: 700px;
+    }
+}

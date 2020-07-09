@@ -1,15 +1,6 @@
 @use 'vars';
 
-hr.luckyblock {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #b0b0b0;
-    margin: 1em 0;
-    padding: 0;
-}
-
-body.luckyblock {
+body.page {
     color: vars.$dark-gray;
     font-size: 14px;
     font-family: vars.$font;
@@ -23,9 +14,18 @@ body.luckyblock {
     padding: 0;
 }
 
-.luckyblock {
-    p {
-        margin: 0;
+.page {
+    h1 {
+        font-family: vars.$title-font;
+        font-weight: 300;
+        font-size: 35px;
+    }
+
+    h2 {
+        color: vars.$primary-text-color;
+        font-family: vars.$title-font;
+        font-weight: 300;
+        font-size: 25px;
     }
 
     a {
