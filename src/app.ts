@@ -7,9 +7,13 @@ import * as jsyaml from 'js-yaml';
 import * as express from 'express';
 import * as handlebars from 'express-handlebars';
 import * as marked from 'marked';
+import * as semver from 'semver';
+import * as moment from 'moment';
 import { promisify } from 'util';
 
-const publicDir = path.join(__dirname, '../public');
+const baseDir = path.join(__dirname, '..');
+const publicDir = path.join(baseDir, 'public');
+const distDir = path.join(baseDir, '../luckyblock-dist');
 
 const globAsync = promisify(glob);
 
@@ -23,6 +27,39 @@ const readData = async (): Promise<{}> => {
         },
         {},
         filePaths
+    );
+};
+
+interface RawDistMeta {
+    readonly subversion: number;
+    readonly mc_version: string;
+    readonly forge_version: string;
+    readonly datetime: Date;
+}
+interface DistMeta extends RawDistMeta {
+    readonly version: string;
+    readonly datetime_str: string;
+}
+const readDist = async (): Promise<ReadonlyArray<DistMeta>> => {
+    const distFolders = await fs.promises.readdir(distDir);
+    const distMetas = await Promise.all(
+        R.map(async (folderName) => {
+            const metaStr = await fs.promises.readFile(
+                path.join(distDir, folderName, 'meta.yaml'),
+                'utf-8'
+            );
+            const distMeta = jsyaml.safeLoad(metaStr) as RawDistMeta;
+            return {
+                ...distMeta,
+                version: distMeta.mc_version + '-' + distMeta.subversion,
+                datetime_str: moment(distMeta.datetime).format('YYYY-MM-DD HH:mm'),
+            };
+        }, distFolders)
+    );
+
+    return R.sortWith(
+        [(a, b) => semver.compare(b.mc_version, a.mc_version), R.descend(R.prop('subversion'))],
+        distMetas
     );
 };
 
@@ -73,8 +110,16 @@ const main = async () => {
     );
     app.engine('md', handlebars({ extname: 'md' }));
 
-    const data = await readData();
-    const templateData = { layout: false };
+    let templateData = {
+        ...(await readData()),
+        versions: await readDist(),
+        layout: false,
+    };
+    // check for new versions every 5 minutes
+    setInterval(async () => {
+        templateData = { ...templateData, versions: await readDist() };
+    }, 1000 * 60 * 5);
+    console.log(templateData);
 
     app.get('/', (req, res) => {
         res.render('index.html', templateData);

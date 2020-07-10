@@ -28,7 +28,9 @@
         "handlebars": "4.7.6",
         "js-yaml": "3.14.0",
         "marked": "1.1.0",
-        "mkdirp": "1.0.4"
+        "mkdirp": "1.0.4",
+        "moment": "2.27.0",
+        "semver": "7.3.2"
     },
     "devDependencies": {
         "@types/express": "4.17.6",
@@ -38,6 +40,7 @@
         "@types/marked": "1.1.0",
         "@types/mkdirp": "1.0.1",
         "@types/ramda": "0.27.7",
+        "@types/semver": "7.3.1",
         "husky": "4.2.5",
         "nodemon": "2.0.4",
         "prettier": "2.0.5",
