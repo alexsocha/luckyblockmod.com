@@ -4,6 +4,8 @@
     background-color: vars.$primary-color;
 
     height: vars.$nav-height;
+    left: 0;
+    right: 0;
     position: fixed;
     width: 100%;
     z-index: 10;

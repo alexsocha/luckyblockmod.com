@@ -28,8 +28,18 @@ body.page {
         font-size: 25px;
     }
 
+    .anchor {
+    }
+
     a {
         text-decoration: none;
+        color: vars.$primary-text-color;
+
+        &:hover {
+            cursor: pointer;
+            color: vars.$primary-color;
+        }
+        transition: color 0.2s;
     }
 
     .left-right {
@@ -50,32 +60,28 @@ body.page {
 
     .btn {
         padding: 8px 12px 8px 12px;
-        background-color: vars.$primary-color;
-        color: white;
         font-weight: bold;
         display: flex;
         flex: 0;
         align-items: center;
         justify-content: center;
 
+        background-color: vars.$primary-color;
+        color: white;
+        text-decoration: none;
         border-radius: 50px;
         box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.1);
         &:hover {
             box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.2);
+            color: white;
         }
         transition: box-shadow 0.4s;
     }
 
-    .text-link {
-        color: vars.$primary-text-color;
-        &:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
-    }
-
     .img-box {
         box-shadow: 2px 2px 28px 8px rgba(0, 0, 0, 0.2);
+        margin: 5px;
+        border-radius: 4px;
     }
 
     .ad-box {

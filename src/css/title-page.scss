@@ -1,17 +1,19 @@
 @use 'vars';
 
 .title-page {
+    display: flex;
+    justify-content: center;
     min-width: 1020px;
 
-    // === common ===
-    .section-spacing {
-        position: relative;
-        right: 0;
-        left: 0;
-        margin-right: auto;
-        margin-left: auto;
-        width: 85%;
+    .content-spacing {
+        flex: 1;
         max-width: 1200px;
+        margin-left: 8%;
+        margin-right: 8%;
+    }
+
+    // === common ===
+    .section {
         padding-bottom: 20px;
     }
     .section-title {
@@ -23,8 +25,7 @@
     .title-section {
         padding-top: vars.$nav-height + 20;
         width: 100%;
-        height: 350px;
-        background-color: vars.$white-gray;
+        height: 330px;
 
         .section-spacing {
             display: flex;
@@ -57,10 +58,14 @@
         }
 
         .right {
-            width: 200px;
-            height: 200px;
-            padding-top: 30px;
-            margin-right: calc(40% - 400px);
+            max-width: 400px;
+            margin-top: 75px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            img {
+                width: 200px;
+            }
         }
     }
 
