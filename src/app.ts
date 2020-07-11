@@ -172,7 +172,7 @@ const main = async () => {
     });
 
     app.get('/docs', (req, res) => {
-        res.render('docs/index.html', templateData);
+        res.render('docs/docs.html', templateData);
     });
     app.get('/docs/*.md', (req, res) => {
         res.render(req.path.substring(1), templateData);

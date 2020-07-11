@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css" />
+{{> header }}
+
+<head>
+    <style>
+        .sidebar {
+            padding-top: 100px;
+        }
+        .content {
+            margin-top: 100px;
+        }
+        .app-nav.no-badge {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    {{> navbar docs=true }}
+    <div id="app"></div>
+    <script>
+        window.$docsify = {
+            name: 'Lucky Block Docs',
+            loadSidebar: true,
+        };
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+    {{> footer }} {{> analytics }}
+</body>

@@ -1,8 +1,5 @@
-{{> header }}
-
+{{> header }} {{> navbar download=true }}
 <body class="luckyblock page title-page">
-    {{> navbar download=true }}
-
     <div class="content-spacing">
         <div class="section title-section">
             <div class="left-right">
@@ -180,14 +177,7 @@
                     <div class="box">
                         <img src="/images/forge_logo.png" />
                         <h2 class="subtitle">Minecraft Forge</h2>
-                        <div class="left-right">
-                            <a class="btn multi-btn" href="http://files.minecraftforge.net/"
-                                >Download</a
-                            >
-                            <a class="btn muti-btn" href="/info#install-instructions"
-                                >Instructions</a
-                            >
-                        </div>
+                        <a class="btn" href="http://files.minecraftforge.net/">Download</a>
                     </div>
                     <div class="box">
                         <img src="/images/minecraft_logo.png" />
@@ -198,5 +188,5 @@
             </div>
         </div>
     </div>
-    {{> analytics }}
+    {{> analytics }} {{> footer }}
 </body>

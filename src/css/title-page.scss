@@ -2,7 +2,7 @@
 
 .title-page {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     min-width: 1020px;
 
     .content-spacing {
@@ -165,7 +165,7 @@
             max-width: 1000px;
             display: flex;
             justify-content: space-between;
-            padding-bottom: 40px;
+            padding-bottom: 50px;
         }
         img {
             width: 150px;
