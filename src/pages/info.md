@@ -46,13 +46,6 @@ Additionally you can modify the 'luck' of the block, or any of the special items
 <img class="img-box" width="40%" style="float: left" src="/images/crafting_luck_positive.png">
 <img class="img-box" width="40%" src="/images/crafting_luck_negative.png">
 
-## Install instructions
-
-1. Download and run the <a href="http://files.minecraftforge.net/">Minecraft Forge installer</a> for your prefered version of Minecraft.
-2. Start Minecraft to make sure everything works.
-3. Download the <a class="text-link" href="/">Lucky Block</a>, and place the file in your <a href="https://minecraft.gamepedia.com/.minecraft">.minecraft</a>/mods folder.
-4. Run Minecraft again, now with the Lucky Block installed.
-
 ## Author & Permissions
 
 The Lucky Block was created by <a href="https://github.com/alexsocha">Alex Socha</a>, alias PlayerInDistress.

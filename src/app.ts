@@ -40,7 +40,11 @@ interface DistMeta extends RawDistMeta {
     readonly version: string;
     readonly datetime_str: string;
 }
-const readDist = async (): Promise<ReadonlyArray<DistMeta>> => {
+interface DistTemplateVars {
+    readonly versions: ReadonlyArray<DistMeta>;
+    readonly versionIndexMap: { readonly [k: string]: number };
+}
+const readDist = async (): Promise<DistTemplateVars> => {
     const distFolders = await fs.promises.readdir(distDir);
     const distMetas = await Promise.all(
         R.map(async (folderName) => {
@@ -57,14 +61,20 @@ const readDist = async (): Promise<ReadonlyArray<DistMeta>> => {
         }, distFolders)
     );
 
-    return R.sortWith(
+    const versions = R.sortWith(
         [(a, b) => semver.compare(b.mc_version, a.mc_version), R.descend(R.prop('subversion'))],
         distMetas
     );
+    const versionIndexMap = R.addIndex<DistMeta, {}>(R.reduce)(
+        (acc, v, i) => ({ ...acc, [v.version]: i }),
+        {},
+        versions
+    );
+    return { versions, versionIndexMap };
 };
 
 const prerenderMarkdown = async () => {
-    const filePaths = await globAsync(path.join(__dirname, 'pages/*.md'));
+    const filePaths = await globAsync(path.join(__dirname, 'pages/**/*.md'));
     await R.forEach(async (filePath) => {
         const contents = await fs.promises.readFile(filePath, 'utf-8');
         const html = marked(contents);
@@ -89,6 +99,10 @@ const copyHtml = async () => {
     }, filePaths);
 };
 
+const genToken = (): string => {
+    return Math.random().toString(36).substr(2);
+};
+
 const main = async () => {
     const app = express();
     const port = 8080;
@@ -110,16 +124,25 @@ const main = async () => {
     );
     app.engine('md', handlebars({ extname: 'md' }));
 
+    let validTokens = [genToken(), genToken()];
+
     let templateData = {
         ...(await readData()),
-        versions: await readDist(),
+        ...(await readDist()),
         layout: false,
+        token: validTokens[1],
     };
+
     // check for new versions every 5 minutes
     setInterval(async () => {
-        templateData = { ...templateData, versions: await readDist() };
+        templateData = { ...templateData, ...(await readDist()) };
     }, 1000 * 60 * 5);
-    console.log(templateData);
+
+    // change tokens every 5 minutes
+    setInterval(async () => {
+        validTokens = [validTokens[1], genToken()];
+        templateData = { ...templateData, token: validTokens[1] };
+    }, 1000 * 60 * 5);
 
     app.get('/', (req, res) => {
         res.render('index.html', templateData);
@@ -134,7 +157,18 @@ const main = async () => {
         res.render('download.html', templateData);
     });
     app.get('/download/:version', (req, res) => {
-        res.render('download-version.html', templateData);
+        const version = req.params['version'];
+        const meta = templateData.versions[templateData.versionIndexMap[version]];
+        res.render('download-version.html', { ...templateData, meta, layout: 'download-version' });
+    });
+    app.get('/download/:version/:token', (req, res) => {
+        const version = req.params['version'];
+        const token = req.params['token'];
+        if (R.includes(token, validTokens)) {
+            const file = path.join(distDir, version, `luckyblock-${version}.jar`);
+            console.log(file);
+            res.download(file);
+        }
     });
 
     app.get('/docs', (req, res) => {
