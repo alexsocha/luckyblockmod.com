@@ -1,0 +1,36 @@
+{{> header }}
+<script src="/js/valid_download.js"></script>
+
+<body class="luckyblock page download-page" onload>
+    {{> navbar download=true }}
+
+    <div class="content-spacing">
+        <div class="title-section">
+            <h1 class="title">Download</h1>
+        </div>
+
+        <div class="ad-box">
+            {{> ad-banner ad-slot=4575070891 format='auto' }}
+        </div>
+
+        <table class="version-table" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Minecraft Version</th>
+                    <th>Forge Version</th>
+                    <th>Date</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            {{#each versions}}
+            <tr>
+                <td>{{this.mc_version}}</td>
+                <td>{{this.forge_version}}</td>
+                <td>{{this.datetime_str}}</td>
+                <td><a href="/download/{{this.version}}/">Download</a></td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+    {{> footer }} {{> analytics }}
+</body>

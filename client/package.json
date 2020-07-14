@@ -1,0 +1,27 @@
+{
+    "name": "luckyblock-website-client",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "build-css": "npx sass src/css/index.scss dist/style.css",
+        "build": "npm run build-css && npx ts-node build.ts"
+    },
+    "dependencies": {
+        "glob": "7.1.6",
+        "js-yaml": "3.14.0",
+        "marked": "1.1.0",
+        "mkdirp": "1.0.4"
+    },
+    "devDependencies": {
+        "@types/express-handlebars": "3.1.0",
+        "@types/glob": "7.1.2",
+        "@types/js-yaml": "3.12.5",
+        "@types/marked": "1.1.0",
+        "@types/mkdirp": "1.0.1",
+        "@types/ramda": "0.27.7",
+        "ramda": "0.27.0",
+        "sass": "1.26.9",
+        "ts-node": "8.10.2",
+        "typescript": "3.9.6"
+    }
+}

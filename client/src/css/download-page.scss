@@ -1,0 +1,35 @@
+@use 'vars';
+
+.download-page {
+    display: flex;
+    justify-content: center;
+
+    .content-spacing {
+        max-width: 800px;
+        flex: 1;
+        margin-left: 8%;
+        margin-right: 8%;
+        padding-bottom: 100px;
+    }
+
+    .title-section {
+        padding-top: vars.$nav-height + 40px;
+    }
+
+    .version-table {
+        width: 100%;
+        margin-top: 20px;
+
+        th {
+            color: vars.$dark-gray;
+            background-color: white;
+            font-weight: bold;
+        }
+        td,
+        th {
+            padding: 8px 12px 8px 12px;
+            font-size: 15px;
+            border-bottom: 1px solid vars.$light-gray;
+        }
+    }
+}
