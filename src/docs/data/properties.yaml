@@ -1,0 +1,10 @@
+properties:
+    - name: doDropsOnCreativeMode
+      type: '`true`\|`false`'
+      default: '`false`'
+      description: Whether the Lucky Block should perform functions when opened by a player in creative mode.
+
+    - name: showUpdateMessage
+      type: '`true`\|`false`'
+      default: '`false`'
+      description: Whether a chat message should be shown when a new verison of the mod is available.

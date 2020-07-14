@@ -1,0 +1,27 @@
+@use 'vars';
+
+.luckyblock.docs-page {
+    font-size: 15px;
+
+    .sidebar {
+        padding-top: vars.$nav-height;
+        margin-top: 30px;
+    }
+    .content {
+        padding-top: vars.$nav-height + 30px;
+    }
+    .app-nav.no-badge {
+        margin: 0;
+    }
+
+    .no-p-margin {
+        p {
+            margin: 0;
+        }
+    }
+    .func-name-args {
+        code {
+            color: inherit;
+        }
+    }
+}

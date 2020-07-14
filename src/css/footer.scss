@@ -1,10 +1,10 @@
 @use 'vars';
 
-footer.luckyblock {
-    clear: both;
-    position: relative;
-    height: 30px;
-    margin-top: -30px;
+.footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
     padding-bottom: 4px;
     display: flex;
@@ -14,14 +14,24 @@ footer.luckyblock {
     .copyright-text {
         font-size: 11px;
         font-family: vars.$font;
+        color: vars.$gray;
 
         a {
             text-decoration: none;
-            color: vars.$dark-gray;
+            color: vars.$gray;
             &:hover {
                 color: vars.$primary-color;
             }
             transition: color 0.2s;
         }
+    }
+}
+
+.luckyblock .docs-footer {
+    margin-top: 50px;
+    font-size: 11px;
+    a {
+        color: inherit;
+        font-weight: inherit;
     }
 }

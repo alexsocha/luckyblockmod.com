@@ -4,7 +4,7 @@
     "description": "The official Lucky Block website",
     "main": "index.js",
     "scripts": {
-        "format": "npx prettier --write .",
+        "format": "npx prettier --write src",
         "build-css": "npx sass src/css/style.scss public/style.css",
         "watch-css": "npx sass --watch src/css/style.scss public/style.css",
         "build": "npm run build-css",

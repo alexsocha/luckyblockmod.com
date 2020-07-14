@@ -18,12 +18,12 @@ const distDir = path.join(baseDir, '../luckyblock-dist');
 const globAsync = promisify(glob);
 
 const readData = async (): Promise<{}> => {
-    const filePaths = await globAsync(path.join(__dirname, 'data/**/*.yaml'));
+    const filePaths = await globAsync(path.join(__dirname, '{docs,pages}/**/*.yaml'));
     return await R.reduce(
         async (acc, filePath) => {
             const contents = await fs.promises.readFile(filePath, 'utf-8');
             const data = jsyaml.safeLoad(contents) as object;
-            return { ...acc, ...data };
+            return { ...(await acc), ...data };
         },
         {},
         filePaths
@@ -91,9 +91,16 @@ const prerenderMarkdown = async () => {
 };
 
 const copyHtml = async () => {
-    const filePaths = await globAsync(path.join(__dirname, 'pages/**/*.html'));
+    const filePaths = await globAsync(
+        path.join(__dirname, '{docs/**/*.md,{docs,pages}/**/*.html}')
+    );
     await R.forEach(async (filePath) => {
-        const publicFilePath = path.join(publicDir, path.relative('src', filePath));
+        const relFilePath = path.relative('src', filePath);
+        const publicFilePath = path.join(
+            publicDir,
+            !relFilePath.startsWith('pages') ? 'pages' : '',
+            relFilePath
+        );
         await mkdirp(path.dirname(publicFilePath));
         await fs.promises.copyFile(filePath, publicFilePath);
     }, filePaths);
@@ -114,15 +121,24 @@ const main = async () => {
     app.use(express.static(path.join(__dirname, 'static')));
     app.use(express.static(publicDir));
 
+    // page engine
     app.engine(
         'html',
         handlebars({
+            extname: 'html',
             partialsDir: path.join(__dirname, 'partials'),
             layoutsDir: path.join(__dirname, 'layouts'),
-            extname: 'html',
         })
     );
-    app.engine('md', handlebars({ extname: 'md' }));
+
+    // docs engine
+    app.engine(
+        'md',
+        handlebars({
+            extname: 'html',
+            partialsDir: path.join(__dirname, 'docs/partials'),
+        })
+    );
 
     let validTokens = [genToken(), genToken()];
 
@@ -132,6 +148,7 @@ const main = async () => {
         layout: false,
         token: validTokens[1],
     };
+    console.log((templateData as any).drops);
 
     // check for new versions every 5 minutes
     setInterval(async () => {

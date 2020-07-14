@@ -1,0 +1,30 @@
+{{> header }}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css" />
+
+<body class="luckyblock docs-page">
+    {{> navbar docs=true }}
+    <div id="app"></div>
+    <script>
+        window.$docsify = {
+            name: 'Lucky Block Docs',
+            homepage: 'configuration-files.md',
+            loadSidebar: true,
+            subMaxLevel: 2,
+            themeColor: '#ffb347',
+            plugins: [
+                function (hook) {
+                    var footer =
+                        "<hr><p class='page docs-footer'>&copy; Copyright <a href='https://github.com/alexsocha'>Alex Socha</a> " +
+                        new Date().getFullYear() +
+                        '</p>';
+
+                    hook.afterEach(function (html) {
+                        return html + footer;
+                    });
+                },
+            ],
+        };
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+    {{> analytics }}
+</body>
