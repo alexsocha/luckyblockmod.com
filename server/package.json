@@ -3,9 +3,9 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "build": "npx tsc src/app.ts --outDir ./dist",
-        "start": "node dist/app.js",
-        "start-cluster": "npx pm2 start \"dist/app.js\" --no-daemon --name app -i max"
+        "build": "npx tsc src/server.ts --outDir ./dist",
+        "start": "node dist/server.js",
+        "start-cluster": "npx pm2 start \"dist/server.js\" --no-daemon --name app -i max"
     },
     "repository": {
         "type": "git",

@@ -1,7 +1,8 @@
 {{> header }}
-<script src="/js/valid_download.js"></script>
 
-<body class="luckyblock page download-page" onload>
+<script src="./utils.ts"></script>
+
+<body class="luckyblock page download-page" onload="validateDownload();">
     {{> navbar download=true }}
 
     <div class="content-spacing">
@@ -22,14 +23,16 @@
                     <th>Link</th>
                 </tr>
             </thead>
-            {{#each versions}}
+
+            {{!-- server-side rendering --}}
+            \{{#each versions}}
             <tr>
-                <td>{{this.mc_version}}</td>
-                <td>{{this.forge_version}}</td>
-                <td>{{this.datetime_str}}</td>
-                <td><a href="/download/{{this.version}}/">Download</a></td>
+                <td>\{{this.mc_version}}</td>
+                <td>\{{this.forge_version}}</td>
+                <td>\{{this.datetime_str}}</td>
+                <td><a href="/download/\{{this.version}}/">Download</a></td>
             </tr>
-            {{/each}}
+            \{{/each}}
         </table>
     </div>
     {{> footer }} {{> analytics }}

@@ -1,3 +1,7 @@
+{{#extend "layouts/download-version" }}
+{{#content "main"}}
+{{#markdown}}
+
 ## Version info
 
 -   Minecraft Version: {{meta.mc_version}}
@@ -11,3 +15,7 @@
 2. Start Minecraft to make sure everything works.
 3. Place the Lucky Block .jar file in your <a href="https://minecraft.gamepedia.com/.minecraft">.minecraft</a>/mods folder.
 4. Run Minecraft again, now with the Lucky Block installed.
+
+{{/markdown}}
+{{/content}}
+{{/extend}}

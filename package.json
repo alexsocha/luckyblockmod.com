@@ -6,9 +6,9 @@
     "scripts": {
         "format": "npx prettier --write --ignore-path .gitignore",
         "build": "cd server && npm run build && cd ../client && npm run build && cd ../docs && npm run build",
-        "watch-server": "nodemon --ext . --watch server/src --exec \"cd server && npm run build && npm run start\"",
-        "watch-client": "nodemon --ext . --watch client/src --exec \"cd client && npm run build\"",
-        "watch-docs": "nodemon --ext . --watch docs/src --exec \"cd docs && npm run build\"",
+        "watch-server": "nodemon --ext . --watch server --ignore dist/ --exec \"cd server && npm run build && npm run start\"",
+        "watch-client": "nodemon --ext . --watch client --ignore dist/ --exec \"cd client && npm run build\"",
+        "watch-docs": "nodemon --ext . --watch docs --ignore dist/ --exec \"cd docs && npm run build\"",
         "watch": "npx concurrently \"npm run watch-server\" \"npm run watch-client\" \"npm run watch-docs\"",
         "postinstall": "cd server && npm i && cd ../client && npm i && cd ../docs && npm i"
     },

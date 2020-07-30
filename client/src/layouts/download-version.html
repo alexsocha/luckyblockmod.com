@@ -1,6 +1,8 @@
 {{> header }}
 
-<body class="luckyblock page download-version-page">
+<script src="./utils.ts"></script>
+
+<body class="luckyblock page download-version-page" onload="validateDownload();">
     {{> navbar download=true }}
     <div class="header-spacing">
         <div class="header left-right">
@@ -10,7 +12,7 @@
                 <div class="wait-text">Please wait...</div>
             </div>
             <div id="done" style="display: none;">
-                <a class="btn" href="./{{token}}">Download</a>
+                <a class="btn" href="./download">Download</a>
             </div>
         </div>
     </div>
@@ -21,7 +23,7 @@
                 {{> ad-banner ad-slot=4575070891 format='auto' }}
             </div>
             <div class="content">
-                {{{ body }}}
+                {{#block "main"}}{{/block}}
             </div>
             <div class="ad-box">
                 {{> ad-banner ad-slot=4575070891 format='auto' }}

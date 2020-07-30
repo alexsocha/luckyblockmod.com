@@ -4,7 +4,7 @@ services:
     build:
         build:
             context: .
-            target: build-client
+            target: build
             dockerfile: Dockerfile
         image: build
         container_name: build
@@ -16,7 +16,8 @@ services:
             - ./server/package.json:/app/server/package.json
             - ./server/dist:/app/server/dist
             - ./client/src:/app/client/src
-            - ./client/build.ts:/app/client/build.ts
+            - ./client/webpack.config.ts:/app/client/webpack.config.ts
+            - ./client/handlebars-loader.ts:/app/client/handlebars-loader.ts
             - ./client/tsconfig.json:/app/client/tsconfig.json
             - ./client/package.json:/app/client/package.json
             - ./client/dist:/app/client/dist
@@ -44,11 +45,9 @@ services:
             - app-network
         volumes:
             - ./server/dist:/app/server/dist
-            - ./client/dist:/app/client/dist
-            - ./client/src/:/app/client/src
-            - ./client/static:/app/client/static
-            - ./docs/dist:/app/docs/dist
             - ./server/package.json:/app/server/package.json
+            - ./client/dist:/app/client/dist
+            - ./docs/dist:/app/docs/dist
             - ../luckyblock-dist:/luckyblock-dist
         command: npm run start-cluster
 
@@ -80,7 +79,7 @@ services:
         networks:
             - app-network
         volumes:
-            - ./nginx-conf/nginx-http.conf:/etc/nginx/conf.d/default.conf
+            - ./server/nginx-conf/nginx-http.conf:/etc/nginx/conf.d/default.conf
 
     certbot:
         image: certbot/certbot
@@ -89,7 +88,6 @@ services:
             # - webserver-http # use this on the initial deploy
             - webserver
         volumes:
-            - ./public:/var/www/html
             - certbot-etc:/etc/letsencrypt
             - certbot-var:/var/lib/letsencrypt
         command: certonly --webroot --webroot-path=/var/www/html --email admin@luckyblockmod.com --agree-tos --no-eff-email --force-renewal -d luckyblockmod.com -d www.luckyblockmod.com

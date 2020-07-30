@@ -69,9 +69,8 @@ const main = async () => {
     const app = express();
     const port = 8080;
 
-    app.set('views', path.join(clientDir, 'dist/pages'));
+    app.set('views', path.join(clientDir, 'dist'));
     app.use(express.static(path.join(clientDir, 'dist')));
-    app.use(express.static(path.join(clientDir, 'static')));
     app.use('/docs', express.static(path.join(docsDir, 'dist')));
 
     // page engine
@@ -79,17 +78,6 @@ const main = async () => {
         'html',
         handlebars({
             extname: 'html',
-            partialsDir: path.join(clientDir, 'src/partials'),
-            layoutsDir: path.join(clientDir, 'src/layouts'),
-        })
-    );
-
-    // docs engine
-    app.engine(
-        'md',
-        handlebars({
-            extname: 'html',
-            partialsDir: path.join(docsDir, 'partials'),
         })
     );
 
@@ -116,7 +104,7 @@ const main = async () => {
         res.render('index.html', templateData);
     });
     app.get('/info', (req, res) => {
-        res.render('info.html', { ...templateData, layout: 'markdown-page' });
+        res.render('info.html', templateData);
     });
     app.get('/download', (req, res) => {
         res.render('download.html', templateData);
