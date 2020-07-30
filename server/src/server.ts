@@ -117,9 +117,6 @@ const main = async () => {
         const version = req.params['version'];
         const host = req.get('host');
         const origin = req.get('origin');
-        console.log(host);
-        console.log(origin);
-        console.log(req.originalUrl);
 
         if (origin !== undefined && origin !== host) {
             // make sure that the request came from the same site,
