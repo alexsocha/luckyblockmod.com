@@ -76,29 +76,18 @@ const main = async () => {
     // page engine
     app.engine(
         'html',
-        handlebars({
-            extname: 'html',
-        })
+        handlebars({ extname: 'html' }),
     );
-
-    let validTokens = [genToken(), genToken()];
 
     let templateData = {
         ...(await readDist()),
         layout: false,
-        token: validTokens[1],
     };
 
     // check for new versions every 5 minutes
     setInterval(async () => {
         templateData = { ...templateData, ...(await readDist()) };
     }, 1000 * 60 * 5);
-
-    // change tokens every hour
-    setInterval(async () => {
-        validTokens = [validTokens[1], genToken()];
-        templateData = { ...templateData, token: validTokens[1] };
-    }, 1000 * 60 * 60);
 
     app.get('/', (req, res) => {
         res.render('index.html', templateData);
@@ -115,12 +104,21 @@ const main = async () => {
     app.get('/download/:version', (req, res) => {
         const version = req.params['version'];
         const meta = templateData.versions[templateData.versionIndexMap[version]];
-        res.render('download-version.html', { ...templateData, meta, layout: 'download-version' });
+        res.render('download-version.html', { ...templateData, meta });
     });
-    app.get('/download/:version/:token', (req, res) => {
+    app.get('/download/:version/download', (req, res) => {
         const version = req.params['version'];
-        const token = req.params['token'];
-        if (R.includes(token, validTokens)) {
+        const host = req.get('host');
+        const origin = req.get('origin');
+        console.log(host);
+        console.log(origin);
+        console.log(req.originalUrl);
+
+        if (origin !== undefined && origin !== host) {
+            // make sure that the request came from the same site,
+            // to prevent direct download links on other websites
+            res.redirect('/');
+        } else {
             const file = path.join(downloadDistDir, version, `luckyblock-${version}.jar`);
             res.download(file);
         }
@@ -137,7 +135,6 @@ const main = async () => {
     app.get('/projects/lucky_block/download/version/version_log.txt', (req, res) => {
         res.redirect('/version_log.txt');
     });
-
     app.get('/projects/*', (req, res) => {
         res.redirect('/');
     });
