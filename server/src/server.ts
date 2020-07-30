@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as jsyaml from 'js-yaml';
 import * as express from 'express';
 import * as handlebars from 'express-handlebars';
+import * as hbsHelpers from 'handlebars-helpers';
 import * as marked from 'marked';
 import * as semver from 'semver';
 import * as moment from 'moment';
@@ -69,15 +70,18 @@ const main = async () => {
     const app = express();
     const port = 8080;
 
-    app.set('views', path.join(clientDir, 'dist'));
+    app.set('views', path.join(clientDir, 'dist/pages'));
     app.use(express.static(path.join(clientDir, 'dist')));
     app.use('/docs', express.static(path.join(docsDir, 'dist')));
 
-    // page engine
-    app.engine(
-        'html',
-        handlebars({ extname: 'html' }),
-    );
+
+    // handlebars engines
+    const txtHbs = handlebars({
+        helpers: hbsHelpers(),
+        extname: 'txt',
+    });
+    app.engine('html', handlebars({ extname: 'html' }));
+    app.engine('txt', txtHbs);
 
     let templateData = {
         ...(await readDist()),
@@ -91,6 +95,9 @@ const main = async () => {
 
     app.get('/', (req, res) => {
         res.render('index.html', templateData);
+    });
+    app.get('/version-log', (req, res) => {
+        res.render('version-log.txt', templateData);
     });
     app.get('/info', (req, res) => {
         res.render('info.html', templateData);
@@ -133,7 +140,7 @@ const main = async () => {
 
     // compatibility
     app.get('/projects/lucky_block/download/version/version_log.txt', (req, res) => {
-        res.redirect('/version_log.txt');
+        res.redirect('/version-log');
     });
     app.get('/projects/*', (req, res) => {
         res.redirect('/');

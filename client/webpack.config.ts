@@ -26,26 +26,20 @@ const config: webpack.Configuration = {
             {
                 test: /\.(html|md)$/,
                 use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].html',
-                        },
-                    },
+                    'file-loader?name=pages/[name].html',
                     'extract-loader',
                     'html-loader',
                     path.join(baseDir, 'handlebars-loader.ts'),
                 ],
             },
             {
+                test: /\.txt$/,
+                loader: 'file-loader?name=pages/[name].txt',
+            },
+            {
                 test: /\.scss$/,
                 use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: 'style.[contenthash:8].css',
-                        },
-                    },
+                    'file-loader?name=style.[contenthash:8].css',
                     'extract-loader',
                     'css-loader',
                     'sass-loader',
@@ -53,26 +47,11 @@ const config: webpack.Configuration = {
             },
             {
                 test: /\.png$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: 'img/[name].[contenthash:8].[ext]',
-                        },
-                    },
-                ],
+                loader: 'file-loader?name=img/[name].[contenthash:8].[ext]',
             },
             {
                 test: /\.ts/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[contenthash:8].js',
-                        },
-                    },
-                    'ts-loader',
-                ],
+                loader: 'file-loader?name=[name].[contenthash:8].js',
             },
         ],
     },

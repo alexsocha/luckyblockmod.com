@@ -1,0 +1,4 @@
+{{!-- server-side rendering --}}
+{{#each versions}}
+{{subtract (length ../versions) @index}}|{{this.mc_version}}|["",{"text":"Lucky Block > ","color":"gold"},{"text":"A new version is available for Minecraft {{this.mc_version}}. You can download it ","color":"gold"},{"text":"here!","color":"blue","underlined":true,"clickEvent":{"action":"open_url","value":"http://www.luckyblockmod.com/"},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Download Lucky Block","color":"blue"}]}}}]
+{{/each}}
