@@ -78,6 +78,11 @@ const config: webpack.Configuration = {
     },
     plugins: [
         new OptimizeCssPlugin(),
+        new CopyPlugin({
+            patterns: [
+                { from: path.join(baseDir, 'src/static'), to: path.join(baseDir, 'dist') },
+            ]
+        }),
         new CleanWebpackPlugin(),
     ]
 };
