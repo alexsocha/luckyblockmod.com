@@ -68,6 +68,7 @@ const genToken = (): string => {
 
 const main = async () => {
     const app = express();
+    const publicDomain = 'luckyblockmod.com';
     const port = 8080;
 
     app.set('views', path.join(clientDir, 'dist/pages'));
@@ -114,18 +115,18 @@ const main = async () => {
         res.render('download-version.html', { ...templateData, meta });
     });
     app.get('/download/:version/download', (req, res) => {
-        const version = req.params['version'];
-        const host = req.get('host');
-        const origin = req.get('origin');
+        try {
+            const version = req.params['version'];
+            const host = req.get('host') || '';
+            const referrerUrl = new URL(req.get('referrer') || '');
 
-        if (origin !== undefined && origin !== host) {
-            // make sure that the request came from the same site,
-            // to prevent direct download links on other websites
-            res.redirect('/');
-        } else {
+            // make sure that other sites don't link directly to the download
+            if (referrerUrl.host !== host && !referrerUrl.host.includes(publicDomain)) res.redirect('/');
+
             const file = path.join(downloadDistDir, version, `luckyblock-${version}.jar`);
             res.download(file);
-        }
+
+        } catch { res.redirect('/'); }
     });
 
     app.get('/docs', (req, res) => {

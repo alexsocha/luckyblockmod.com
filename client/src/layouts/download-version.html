@@ -1,9 +1,11 @@
+<script src="./utils.ts"></script>
+<script>validateDownload();</script>
+
 {{> header }}
 
-<script src="./utils.ts"></script>
-
-<body class="luckyblock page download-version-page" onload="validateDownload();">
+<body class="luckyblock page download-version-page">
     {{> navbar download=true }}
+
     <div class="header-spacing">
         <div class="header left-right">
             <h1>Lucky Block {{meta.version}}</h1>
