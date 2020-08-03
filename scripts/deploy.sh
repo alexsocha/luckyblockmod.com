@@ -16,6 +16,7 @@ rsync -aiR \
     ./server/package.json \
     ./server/package.json \
     ./server/package-lock.json \
+    ./scripts/ssl_renew.sh \
     ./package.json \
     ./docker-compose.yaml \
     ./Dockerfile \

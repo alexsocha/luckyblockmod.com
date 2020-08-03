@@ -38,20 +38,26 @@ After building the app with
 docker-compose up build
 ```
 
-upload the relevant files (see `scripts/deploy.sh`) to a webserver. On the server, run
+upload the relevant files (see `scripts/deploy.sh`) to a webserver. Edit the `certbot` service in `docker-compose.yaml` to depend on `webserver-http`. On the server, run
 ```
 docker-compose up app webserver-http certbot
 ```
 
-to obtain an SSL certificate, followed by 
+to obtain an SSL certificate. Revert `docker-compose.yaml` and run
 ```
 docker-compose down
 docker-compose up app webserver
 ```
 
+to start the server. Finally, use `crontab -e` to schedule a task which renews the certificate every 4 days, by appending
+
+```
+0 0 */4 * * ~/luckyblock-website/scripts/ssl_renew.sh >> /var/log/cron.log 2>&1
+```
+
 **Updates**
 
-Build the app as before, and simply run 
+Build the app as above, then simply run 
 ```
 ./scripts/deploy.sh
 ```
