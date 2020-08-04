@@ -14,7 +14,7 @@ const registerPartials = (hbsInst: typeof handlebars, partialsGlob: string, pref
         const contents = fs.readFileSync(filePath, 'utf-8');
         hbsInst.registerPartial(prefix + path.parse(filePath).name, contents);
     });
-}
+};
 
 registerPartials(handlebars, 'src/partials/*.html', '');
 registerPartials(handlebars, 'src/layouts/*.html', 'layouts/');
@@ -25,6 +25,6 @@ handlebars.registerHelper(hbsLayoutHelper(handlebars));
 const hbsLoader = (content: string) => {
     const result = handlebars.compile(content)({});
     return result;
-}
+};
 
 export default hbsLoader;

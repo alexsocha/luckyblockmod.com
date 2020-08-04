@@ -75,7 +75,6 @@ const main = async () => {
     app.use(express.static(path.join(clientDir, 'dist')));
     app.use('/docs', express.static(path.join(docsDir, 'dist')));
 
-
     // handlebars engines
     const txtHbs = handlebars({
         helpers: hbsHelpers(),
@@ -121,12 +120,14 @@ const main = async () => {
             const referrerUrl = new URL(req.get('referrer') || '');
 
             // make sure that other sites don't link directly to the download
-            if (referrerUrl.host !== host && !referrerUrl.host.includes(publicDomain)) res.redirect('/');
+            if (referrerUrl.host !== host && !referrerUrl.host.includes(publicDomain))
+                res.redirect('/');
 
             const file = path.join(downloadDistDir, version, `luckyblock-${version}.jar`);
             res.download(file);
-
-        } catch { res.redirect('/'); }
+        } catch {
+            res.redirect('/');
+        }
     });
 
     app.get('/docs', (req, res) => {

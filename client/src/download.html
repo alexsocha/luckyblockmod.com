@@ -1,5 +1,7 @@
 <script src="./utils.ts"></script>
-<script>validateDownload();</script>
+<script>
+    validateDownload();
+</script>
 
 {{> header }}
 
@@ -25,8 +27,7 @@
                 </tr>
             </thead>
 
-            {{!-- server-side rendering --}}
-            \{{#each versions}}
+            {{!-- server-side rendering --}} \{{#each versions}}
             <tr>
                 <td>\{{this.mc_version}}</td>
                 <td>\{{this.forge_version}}</td>

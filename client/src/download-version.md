@@ -5,6 +5,7 @@
 ## Version info
 
 {{!-- server-side rendering --}}
+
 -   Minecraft Version: \{{meta.mc_version}}
 -   Forge Version: \{{meta.forge_version}}
 -   Built on: \{{meta.datetime_str}}

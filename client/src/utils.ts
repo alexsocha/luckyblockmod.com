@@ -8,4 +8,4 @@ const validateDownload = () => {
     if (referrerHost !== host) {
         window.location.replace('/');
     }
-}
+};

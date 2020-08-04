@@ -18,7 +18,7 @@ const readData = async (): Promise<{}> => {
             return { ...(await acc), ...data };
         },
         {},
-        await globAsync(path.join(baseDir, 'src/data/*.yaml')),
+        await globAsync(path.join(baseDir, 'src/data/*.yaml'))
     );
 };
 
@@ -42,8 +42,7 @@ const render = async () => {
         const distFilePath = path.join(baseDir, 'dist', path.relative('src', filePath));
         await mkdirp(path.dirname(distFilePath));
         await fs.promises.writeFile(distFilePath, rendered, 'utf-8');
-
     }, await globAsync(path.join(baseDir, 'src/*.md')));
-}
+};
 
 render();

@@ -4,7 +4,7 @@
     "private": true,
     "description": "The official Lucky Block website.",
     "scripts": {
-        "format": "npx prettier --write --ignore-path .gitignore",
+        "format": "npx prettier --write --ignore-path .gitignore .",
         "build": "cd server && npm run build && cd ../client && npm run build && cd ../docs && npm run build",
         "watch-server": "nodemon --ext . --watch server --ignore dist/ --exec \"cd server && npm run build && npm run start\"",
         "watch-client": "nodemon --ext . --watch client --ignore dist/ --exec \"cd client && npm run build\"",
@@ -14,10 +14,12 @@
     },
     "author": "alexsocha",
     "license": "UNLICENSED",
-    "dependencies": {
+    "devDependencies": {
         "concurrently": "5.2.0",
         "husky": "4.2.5",
-        "nodemon": "2.0.4"
+        "nodemon": "2.0.4",
+        "prettier": "2.0.5",
+        "pretty-quick": "2.0.1"
     },
     "husky": {
         "hooks": {
