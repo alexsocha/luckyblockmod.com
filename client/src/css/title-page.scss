@@ -95,9 +95,10 @@
         }
     }
 
+    // === description section ===
     .description-section {
         .left-right {
-            padding-bottom: 20px;
+            padding-bottom: 40px;
         }
         .text {
             max-width: 550px;
@@ -142,7 +143,6 @@
     // === addon section ===
     .addon-section {
         margin-bottom: -50px;
-        //background-color: vars.$white-gray;
         img {
             max-width: 450px;
         }
@@ -184,7 +184,6 @@
             height: 150px;
         }
         .box {
-            //width: 280px;
             display: flex;
             flex-direction: column;
             justify-content: center;
