@@ -5,7 +5,7 @@
 | Type            | Examples                                        | Description                                                                                                                          |
 | --------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `integer`       | `5`, `-7`, `200`                                | A positive or negative whole number.                                                                                                 |
-| `float`         | `0.4`, `-180.0`, `-20F` `400f`                  | A positive or negagative floating point number.                                                                                      |
+| `float`         | `0.4`, `-180.0`, `-20F` `400f`                  | A positive or negative floating point number.                                                                                        |
 | `true`\|`false` | `true`, `false`                                 | A conditional boolean value.                                                                                                         |
 | `text`          | `lucky:lucky_block`, `"Hi, how are you?"`       | A text value.                                                                                                                        |
 | `NBT Tag`       | `(title="My Book", pages=["page 1", "page 2"])` | Data in [Minecraft NBT format](https://minecraft.gamepedia.com/NBT_format), specified using [custom syntax](proprty-types#nbt-tags). |
@@ -17,7 +17,7 @@
 When specifying a text value, quotes are usually not be needed. By convention, quotes should not be used for IDs and other one-word properties, but should be used for text containing multiple words. However, quotes are needed when:
 
 -   The value of the text can be interpreted as any other data type, such as a number (e.g. "5"). A
--   The text conains any of the following symbols: `, ; ( ) [ ] { }`.
+-   The text contains any of the following symbols: `, ; ( ) [ ] { }`.
 
 You can also use a backslash `\` to cancel special symbols, including quotes within quotes. The two examples below are equivalent:
 

@@ -9,13 +9,13 @@ The Lucky Block configuration files can be found in the `.minecrat/config/lucky/
 | Name                    | Type            | Default | Description                                                                                |
 | ----------------------- | --------------- | ------- | ------------------------------------------------------------------------------------------ |
 | `doDropsOnCreativeMode` | `true`\|`false` | `false` | Whether the Lucky Block should perform functions when opened by a player in creative mode. |
-| `showUpdateMessage`     | `true`\|`false` | `true`  | Whether a chat message should be shown when a new verison of the mod is available.         |
+| `showUpdateMessage`     | `true`\|`false` | `true`  | Whether a chat message should be shown when a new version of the mod is available.         |
 
 ## Luck crafting
 
 -   File: `luck_crafting.txt`
 
-Certain items can affect the 'luck' of a Lucky Block or Lucky Potion when combined in a crafting table. This skewes the the probability of positive/negative outcomes, with values ranging from -100 to 100. These items are specified here, using the format.
+Certain items can affect the 'luck' of a Lucky Block or Lucky Potion when combined in a crafting table. This skews the probability of positive/negative outcomes, with values ranging from -100 to 100. These items are specified here, using the format.
 
 ```
 [item]=[-100..100]
@@ -33,17 +33,17 @@ pufferfish=-15
 
 -   File: `natural_gen.txt`
 
-The Lucky Block can generate naturally in the Minecraft world, and accross all dimensions. Every entry in this file is a standard Lucky Block [outcome](outcomes), which will occur naturally within the world. Dimensions are separated by `>{dimension_id}`
+The Lucky Block can generate naturally in the Minecraft world, and across all dimensions. Every entry in this file is a standard Lucky Block [outcome](outcomes), which will occur naturally within the world. Dimensions are separated by `>{dimension_id}`
 
 While not a requirement, the file should only contain outcomes that place Lucky Blocks in the world. This includes either directly placing a Lucky Block or using a custom structure. Lastly, the outcomes should not use any properties related to the player, as they are not initiated by a player.
 
 ### Spawnrate
 
-Each outcome has a one in `spawnrate` chance of occuring per chunk (16x16 block region). Therefore, higher spawnrates mean that the outcome is less likely to occur. To specify the spawnrate of a outcome, use the [@chance](combined_outcomes#chance) property. Note that this usage of the chance property is not related to the regular usage (e.g. in `drops.txt`). Also note that `@luck` has no effect.
+Each outcome has a one in `spawnrate` chance of ocuring per chunk (16x16 block region). Therefore, higher spawnrates mean that the outcome is less likely to occur. To specify the spawnrate of a outcome, use the [@chance](combined_outcomes#chance) property. Note that this usage of the chance property is not related to the regular usage (e.g. in `drops.txt`). Also note that `@luck` has no effect.
 
 > If two outcomes have the same spawnrate, the overall chance of generation will double. If a spawnrate of 1/200 (@chance=200) is desired, and there are two possible outcomes, it would be appropriate to give each a spawnrate of 1/400 (@chance=400).
 
-The location of the spawn will usually be on the surface layer of the world, as long as a valid surface is found. If this is not possible, e.g. in an ocean boime, the spawn may occur in an underground cave.
+The location of the spawn will usually be on the surface layer of the world, as long as a valid surface is found. If this is not possible, e.g. in an ocean biome, the spawn may occur in an underground cave.
 
 ### Example
 
@@ -59,7 +59,7 @@ type=block,ID=lucky:lucky_block@chance=35
 type=block,ID=lucky:lucky_block@chance=25
 ```
 
-In the overworld, this spawn one of two structures. The overal surface spawnrate is 1/200. In the Nether and the End, only single Lucky Blocks will spawn. Note the much higher spawnrates (1/35 and 1/25), due to the difficulty of navigating these dimensions.
+In the overworld, this spawn one of two structures. The overall surface spawnrate is 1/200. In the Nether and the End, only single Lucky Blocks will spawn. Note the much higher spawnrates (1/35 and 1/25), due to the difficulty of navigating these dimensions.
 
 ## Structures
 
@@ -76,7 +76,7 @@ You can export `.schematic` structures from Minecraft directly.
 -   Easier to edit
 -   Support Lucky Block [hash variables](property-values#hash_variables)
 
-You can also use these structures as an overalay on top of `.schematic` structures, to configure detailed elements such as entities and block entities.
+You can also use these structures as an overlay on top of `.schematic` structures, to configure detailed elements such as entities and block entities.
 
 **Format**
 
@@ -132,7 +132,7 @@ This file lists all of the available structures, and configures additional prope
 
 **Structure coordinates**
 
-To make working with structures easier, it's recomended that you:
+To make working with structures easier, it's recommended that you:
 
 -   Build the structure facing north (in the negative z direction).
 -   If the structure's rotation is relative to the player's direction, build it the way it will appear when the player is facing north.
@@ -158,7 +158,7 @@ To generate the structure, we will include a rotation relative to the direction 
 type=structure,ID=ship,pos=#pPos,rotation=#pDirect
 ```
 
-Now let's say that we instead want to generate the ship so that it's travelling towards the player. Below is an examle configuration which uses the same structure file:
+Now let's say that we instead want to generate the ship so that it's travelling towards the player. Below is an example configuration which uses the same structure file:
 
 ```
 (structures.txt)

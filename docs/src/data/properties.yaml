@@ -7,4 +7,4 @@ properties:
     - name: showUpdateMessage
       type: '`true`\|`false`'
       default: '`false`'
-      description: Whether a chat message should be shown when a new verison of the mod is available.
+      description: Whether a chat message should be shown when a new version of the mod is available.

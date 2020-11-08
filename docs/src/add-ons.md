@@ -73,7 +73,7 @@ pack.mcmeta
     -   You can also add translations for other languages.
 -   Update the texture `.png` files.
 -   Leave the file `pack.mcmeta` unchanged. Add-ons are loaded in a similar way to resource packs, and an error message will appear if this file doesn't exist. Otherwise it serves no purpose.
--   Use the remaining configurtion files customize the add-on as you like.
+-   Use the remaining configuration files customize the add-on as you like.
 -   When referencing the ID of the new block/items, use the prefix `lucky:`.
 
 ## Template add-on

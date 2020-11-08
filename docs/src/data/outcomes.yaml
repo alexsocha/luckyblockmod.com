@@ -128,7 +128,7 @@ outcomes:
         - name: overlayStruct
           type: 'Structure ID'
           default: None
-          description: The ID of a different structure that will be overlayed onto this one. The other structure must have been previously configured in the file. While not a requirement, the other structure should usually have `blockMode=overlay`. This is commonly used for `.schematic` structures which require a `.luckystruct` overlay to configure the finer details, such as entities and block entities.
+          description: The ID of a different structure that will be overlaid onto this one. The other structure must have been previously configured in the file. While not a requirement, the other structure should usually have `blockMode=overlay`. This is commonly used for `.schematic` structures which require a `.luckystruct` overlay to configure the finer details, such as entities and block entities.
           example: ID=ship_inner,file=ship_inner.luckystruct
               ID=ship,file=ship.shematic,overlayStruct=ship_inner
 
@@ -151,7 +151,7 @@ outcomes:
           example: type=command,ID="/say Hello"
 
         - name: commandSender
-          type: The name of a player, or a selecor
+          type: The name of a player, or a selector
           default: '`@a`'
           description: The sender of the command.
           example: type=command,commandSender=PlayerInDistress,ID="/tell @a Here is a message from PlayerInDistress"

@@ -29,7 +29,7 @@ The Lucky Projectile is a special entity which performs outcomes on impact. It i
     -   id: `text`. The item ID.
     -   tag: `Compound NBT tag` (optional). Additional item data.
 -   trail (optional): The outcomes that will occur while the projectile is alive.
-    -   frequency: `float`. How frequenently the outcomes will occur, in [game ticks](https://minecraft.gamepedia.com/Tick) (0.05 seconds). A value less than one will cause multiple outcomes per tick.
+    -   frequency: `float`. How frequently the outcomes will occur, in [game ticks](https://minecraft.gamepedia.com/Tick) (0.05 seconds). A value less than one will cause multiple outcomes per tick.
     -   drops: `["outcome 1", "outcome 2", ...]`. A list of trail outcomes. Only one is chosen each time.
 -   drops: `["outcome 1", "outcome 2", ...]`. A list of outcomes that will occur on impact. Only one is chosen each time.
 

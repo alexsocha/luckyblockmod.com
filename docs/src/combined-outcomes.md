@@ -24,7 +24,7 @@ group(ID=wooden_sword;group:1:(type=entity,ID=creeper;type=entity,ID=zombie))
 
 -   Property: `@luck`
 
-Luck level is and additional property which describes how 'lucky' an outcome is, in the range `-2..2`. When the luck property of the source block/item/etc is increased/decrased, outcomes with a higher/lower luck level become more likely. The default luck level is `0`. Below is a rough guide for all of the levels:
+Luck level is and additional property which describes how 'lucky' an outcome is, in the range `-2..2`. When the luck property of the source block/item/etc is increased/decreased, outcomes with a higher/lower luck level become more likely. The default luck level is `0`. Below is a rough guide for all of the levels:
 
 -   `-2`: Very unlucky. Might kill the player or do great damage.
 -   `-1`: Unlucky. Does something that the player would not want, or something completely useless.

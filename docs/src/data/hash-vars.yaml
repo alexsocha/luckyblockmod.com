@@ -156,7 +156,7 @@ hash_vars:
         - name: '{#sPos, #sPosX, #sPosY, #sPosZ}'
           args: 'x, y, z'
           return_type: 'An integer or float `(x,y,z)` tuple'
-          description: Converts the given structure coordinates to the corresponding world coordinates of the generated structure. The input is an `(x,y,z)` tuple, in relative structure coordinates. `#sPos` will output the corresponding `(x,y,z)` tuple in world coordinates, while `#sPos{X,Y,Z}` will output each component separtely. The output will use `float` values if one of the input coordinates is a `float`, and otherwise `integer` values.
+          description: Converts the given structure coordinates to the corresponding world coordinates of the generated structure. The input is an `(x,y,z)` tuple, in relative structure coordinates. `#sPos` will output the corresponding `(x,y,z)` tuple in world coordinates, while `#sPos{X,Y,Z}` will output each component separately. The output will use `float` values if one of the input coordinates is a `float`, and otherwise `integer` values.
           example: 1,0,1,lucky:lucky_block,0,tileEntity=(Drops=["type=entity,ID=Zombie,pos=#sPos(2.5,0,2.5))"])
 
         - name: '#drop'
