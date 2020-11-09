@@ -16,7 +16,8 @@ const docsDir = path.join(baseDir, '../docs');
 const downloadDistDir = path.join(baseDir, '../../luckyblock-dist');
 
 interface RawDistMeta {
-    readonly subversion: number;
+    readonly subversion?: number;
+    readonly version?: string;
     readonly mc_version: string;
     readonly forge_version: string;
     readonly datetime: Date;
@@ -44,16 +45,13 @@ const readDist = async (): Promise<DistTemplateVars> => {
             const distMeta = jsyaml.safeLoad(metaStr) as RawDistMeta;
             return {
                 ...distMeta,
-                version: distMeta.mc_version + '-' + distMeta.subversion,
+                version: distMeta.version ?? distMeta.mc_version + '-' + distMeta.subversion,
                 datetime_str: moment(distMeta.datetime).format('YYYY-MM-DD HH:mm'),
             };
         }, distFolders)
     );
 
-    const versions = R.sortWith(
-        [(a, b) => semver.compare(b.mc_version, a.mc_version), R.descend(R.prop('subversion'))],
-        distMetas
-    );
+    const versions = R.sortWith([(a, b) => semver.compare(b.version, a.version)], distMetas);
     const versionIndexMap = R.addIndex<DistMeta, {}>(R.reduce)(
         (acc, v, i) => ({ ...acc, [v.version]: i }),
         {},

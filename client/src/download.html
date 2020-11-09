@@ -20,7 +20,7 @@
         <table class="version-table" cellspacing="0">
             <thead>
                 <tr>
-                    <th>Minecraft Version</th>
+                    <th>Version</th>
                     <th>Forge Version</th>
                     <th>Date</th>
                     <th>Link</th>
@@ -29,7 +29,7 @@
 
             {{!-- server-side rendering --}} \{{#each versions}}
             <tr>
-                <td>\{{this.mc_version}}</td>
+                <td>\{{this.version}}</td>
                 <td>\{{this.forge_version}}</td>
                 <td>\{{this.datetime_str}}</td>
                 <td><a href="/download/\{{this.version}}/">Download</a></td>

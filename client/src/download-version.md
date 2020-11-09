@@ -6,10 +6,9 @@
 
 {{!-- server-side rendering --}}
 
--   Minecraft Version: \{{meta.mc_version}}
+-   Version: \{{meta.version}}
 -   Forge Version: \{{meta.forge_version}}
 -   Built on: \{{meta.datetime_str}}
--   Subversion: \{{meta.subversion}}
 
 ## Install instructions
 
