@@ -34,7 +34,7 @@ Spawns an entity.
 
 -   `type=structure`
 
-Generates a structure, which has been [preconfigured](config_files#structures).
+Generates a structure, which has been [preconfigured](configuration-files#structurestxt).
 
 {{> arg-table args=outcomes.structure }}
 
