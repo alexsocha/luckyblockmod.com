@@ -107,7 +107,7 @@ hash_vars:
           example: type=item,ID=#randSpawnEgg
 
     nbt:
-        - name: '#luckySwordEnchantments, #luckyAxeEnchantments, #luckyToolEnchantments, #luckyBowEnchantments, #luckyFishingRodEnchantments'
+        - name: '#luckySwordEnchantments, #luckyAxeEnchantments, #luckyToolEnchantments, #luckyBowEnchantments, #luckyFishingRodEnchantments, #luckyCrossbowEnchantments, #luckyTridentEnchantments'
           return_type: '`[(id=enchantment_id, lvl=integer), ...]`'
           description: Selects random enchantments for each item catagory.
           example: type=item,ID=diamond_axe,NBTTag=(ench=#luckyAxeEnchantments)
