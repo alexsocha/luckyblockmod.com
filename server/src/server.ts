@@ -2,12 +2,12 @@ import * as R from 'ramda';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as jsyaml from 'js-yaml';
-import * as express from 'express';
-import * as handlebars from 'express-handlebars';
-import * as hbsHelpers from 'handlebars-helpers';
 import * as marked from 'marked';
 import * as semver from 'semver';
-import * as moment from 'moment';
+import express from 'express';
+import handlebars from 'express-handlebars';
+import hbsHelpers from 'handlebars-helpers';
+import moment from 'moment';
 import { promisify } from 'util';
 
 const baseDir = path.join(__dirname, '..');
@@ -42,7 +42,7 @@ const readDist = async (): Promise<DistTemplateVars> => {
                 path.join(downloadDistDir, folderName, 'meta.yaml'),
                 'utf-8'
             );
-            const distMeta = jsyaml.safeLoad(metaStr) as RawDistMeta;
+            const distMeta = jsyaml.load(metaStr) as RawDistMeta;
             return {
                 ...distMeta,
                 version: distMeta.version ?? distMeta.mc_version + '-' + distMeta.subversion,

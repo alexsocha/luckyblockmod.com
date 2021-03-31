@@ -1,78 +1,20 @@
 version: '3.5'
 
 services:
-    build:
-        build:
-            context: .
-            target: build
-            dockerfile: Dockerfile
-        image: build
-        container_name: build
-        environment:
-            - NODE_ENV=production
-        volumes:
-            - ./server/src:/app/server/src
-            - ./server/tsconfig.json:/app/server/tsconfig.json
-            - ./server/package.json:/app/server/package.json
-            - ./server/dist:/app/server/dist
-            - ./client/src:/app/client/src
-            - ./client/webpack.config.ts:/app/client/webpack.config.ts
-            - ./client/handlebars-loader.ts:/app/client/handlebars-loader.ts
-            - ./client/tsconfig.json:/app/client/tsconfig.json
-            - ./client/package.json:/app/client/package.json
-            - ./client/dist:/app/client/dist
-            - ./docs/src:/app/docs/src
-            - ./docs/build.ts:/app/docs/build.ts
-            - ./docs/tsconfig.json:/app/docs/tsconfig.json
-            - ./docs/package.json:/app/docs/package.json
-            - ./docs/dist:/app/docs/dist
-            - ./package.json:/app/package.json
-        command: npm run build
-
     app:
         build:
             context: .
             target: run-server
-            dockerfile: Dockerfile
-        image: app
-        container_name: app
-        restart: unless-stopped
         ports:
             - 8080:8080
-        environment:
-            - NODE_ENV=production
         networks:
             - app-network
         volumes:
-            - ./server/dist:/app/server/dist
-            - ./server/package.json:/app/server/package.json
-            - ./client/dist:/app/client/dist
-            - ./docs/dist:/app/docs/dist
             - ../luckyblock-dist:/luckyblock-dist
-        command: npm run start-cluster
-
-    webserver:
-        image: nginx:mainline-alpine
-        container_name: webserver
-        restart: unless-stopped
-        depends_on:
-            - app
-        ports:
-            - '80:80'
-            - '443:443'
-        networks:
-            - app-network
-        volumes:
-            - ./server/nginx-conf/nginx.conf:/etc/nginx/conf.d/default.conf
-            - ./server/dhparam:/etc/ssl/certs
-            - ./client/dist:/var/www/html # used only by certbot
-            - certbot-etc:/etc/letsencrypt
-            - certbot-var:/var/lib/letsencrypt
 
     # use this when testing locally, and on the initial deploy (before certbot enables https)
-    webserver-http:
+    webserver:
         image: nginx:mainline-alpine
-        container_name: webserver-http
         depends_on:
             - app
         ports:
@@ -81,23 +23,6 @@ services:
             - app-network
         volumes:
             - ./server/nginx-conf/nginx-http.conf:/etc/nginx/conf.d/default.conf
-            - ./client/dist:/var/www/html # used only by certbot
-
-    certbot:
-        image: certbot/certbot
-        container_name: certbot
-        depends_on:
-            # - webserver-http # use this on the initial deploy
-            - webserver
-        volumes:
-            - ./client/dist:/var/www/html
-            - certbot-etc:/etc/letsencrypt
-            - certbot-var:/var/lib/letsencrypt
-        command: certonly --webroot --webroot-path=/var/www/html --agree-tos --no-eff-email --force-renewal -d luckyblockmod.com -d www.luckyblockmod.com
-
-volumes:
-    certbot-etc:
-    certbot-var:
 
 networks:
     app-network:
