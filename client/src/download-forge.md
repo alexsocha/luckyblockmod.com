@@ -1,4 +1,4 @@
-{{#extend "layouts/download-version" }}
+{{#extend "layouts/download-version" platform-text="for Minecraft: Java Edition + Forge" }}
 {{#content "main"}}
 {{#markdown}}
 
