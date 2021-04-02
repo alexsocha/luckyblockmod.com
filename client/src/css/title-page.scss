@@ -169,6 +169,21 @@
     }
 
     .download-section {
+        .subtitle {
+            text-align: center;
+            line-height: 1.5em;
+            margin-bottom: 5px;
+        }
+        .version-tag {
+            color: vars.$gray;
+        }
+
+        .coming-soon {
+            font-size: 16px;
+            font-weight: bold;
+            color: vars.$gray;
+        }
+
         .boxes {
             flex: 1;
             padding-top: 40px;
@@ -186,7 +201,6 @@
         .box {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
         }
         .multi-btn {

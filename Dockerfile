@@ -2,11 +2,15 @@
 FROM node:10-alpine as build
 WORKDIR /app
 
-COPY . .
+COPY server/package*.json server/
+COPY client/package*.json client/
+COPY docs/package*.json docs/
 
 RUN cd server && npm ci
 RUN cd client && npm ci
 RUN cd docs && npm ci
+
+COPY . .
 
 RUN npm run build
 

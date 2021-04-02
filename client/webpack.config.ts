@@ -51,7 +51,10 @@ const config: webpack.Configuration = {
             },
             {
                 test: /\.ts/,
-                loader: 'file-loader?name=[name].[contenthash:8].js',
+                use: [
+                    { loader: 'file-loader?name=[name].[contenthash:8].js' },
+                    { loader: 'ts-loader' },
+                ],
             },
         ],
     },

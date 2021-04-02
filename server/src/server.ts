@@ -13,51 +13,91 @@ import { promisify } from 'util';
 const baseDir = path.join(__dirname, '..');
 const clientDir = path.join(baseDir, '../client');
 const docsDir = path.join(baseDir, '../docs');
-const downloadDistDir = path.join(baseDir, '../../luckyblock-dist');
+const distDir = path.join(baseDir, '../../luckyblock-dist');
 
-interface RawDistMeta {
-    readonly subversion?: number;
-    readonly version?: string;
-    readonly mc_version: string;
-    readonly forge_version: string;
+interface VersionMetaFile {
+    readonly version: string;
+    readonly version_number: number;
+    readonly min_minecraft_version: string;
+    readonly min_forge_version: string;
     readonly datetime: Date;
 }
-interface DistMeta extends RawDistMeta {
-    readonly version: string;
+
+interface VersionMeta extends VersionMetaFile {
     readonly datetime_str: string;
+    readonly min_minecraft_version: string;
 }
-interface DistTemplateVars {
-    readonly versions: ReadonlyArray<DistMeta>;
-    readonly versionIndexMap: { readonly [k: string]: number };
+
+type ProjectName = 'forge' | 'fabric' | 'template-addon-java' | 'template-addon-bedrock';
+
+type VersionMap = {
+    readonly [k: string]: VersionMeta;
+};
+type SortedVersions = {
+    readonly [k in ProjectName]: ReadonlyArray<VersionMeta>;
+};
+
+interface VersionTemplateVars {
+    readonly versionMap: VersionMap;
+    readonly sortedVersions: SortedVersions;
 }
-const readDist = async (): Promise<DistTemplateVars> => {
-    const distFolders = await fs.promises.readdir(downloadDistDir).catch((err) => {
-        console.error(`${downloadDistDir} is empty`);
+
+const readDist = async (): Promise<VersionTemplateVars> => {
+    const distFolders = await fs.promises.readdir(distDir).catch((err) => {
+        console.error(`${distDir} is empty`);
         return [];
     });
 
-    const distMetas = await Promise.all(
+    const initMetas = await Promise.all(
         R.map(async (folderName) => {
-            const metaStr = await fs.promises.readFile(
-                path.join(downloadDistDir, folderName, 'meta.yaml'),
-                'utf-8'
-            );
-            const distMeta = jsyaml.load(metaStr) as RawDistMeta;
-            return {
-                ...distMeta,
-                version: distMeta.version ?? distMeta.mc_version + '-' + distMeta.subversion,
-                datetime_str: moment(distMeta.datetime).format('YYYY-MM-DD HH:mm'),
-            };
+            try {
+                const metaStr = await fs.promises.readFile(
+                    path.join(distDir, folderName, 'meta.yaml'),
+                    'utf-8'
+                );
+                const metaFile = jsyaml.load(metaStr) as VersionMetaFile;
+                if (metaFile.version == undefined) console.log(metaFile);
+                const meta: VersionMeta = {
+                    ...metaFile,
+                    datetime_str: moment(metaFile.datetime).format('YYYY-MM-DD HH:mm'),
+                    min_minecraft_version: metaFile.min_minecraft_version,
+                    min_forge_version: metaFile.min_forge_version,
+                    version: metaFile.version,
+                };
+                return [folderName, meta] as [string, VersionMeta];
+            } catch {
+                return undefined;
+            }
         }, distFolders)
     );
+    const metas = R.filter((v) => v !== undefined, initMetas) as Array<[string, VersionMeta]>;
 
-    const versions = R.sortWith([(a, b) => semver.compare(b.version, a.version)], distMetas);
-    const versionIndexMap = R.addIndex<DistMeta, {}>(R.reduce)(
-        (acc, v, i) => ({ ...acc, [v.version]: i }),
-        {},
-        versions
+    const versionMap = R.fromPairs(metas);
+
+    const getProjectName = (folderName: String): ProjectName => {
+        if (folderName.endsWith('forge')) return 'forge';
+        if (folderName.startsWith('template-addon') && folderName.endsWith('java'))
+            return 'template-addon-java';
+        if (folderName.startsWith('template-addon') && folderName.endsWith('bedrock'))
+            return 'template-addon-bedrock';
+        return 'forge';
+    };
+
+    const versionsByProject = R.reduceBy(
+        (acc, [_, meta]) => {
+            acc.push(meta);
+            return acc;
+        },
+        [] as Array<VersionMeta>,
+        ([folderName]) => getProjectName(folderName),
+        metas
     );
-    return { versions, versionIndexMap };
+    const sortedVersions: SortedVersions = R.map(
+        R.sortWith([(a, b) => semver.compare(b.version, a.version)]),
+        versionsByProject
+    );
+
+    return { versionMap, sortedVersions };
 };
 
 const genToken = (): string => {
@@ -108,7 +148,7 @@ const main = async () => {
     });
     app.get('/download/:version', (req, res) => {
         const version = req.params['version'];
-        const meta = templateData.versions[templateData.versionIndexMap[version]];
+        const meta = templateData.versionMap['luckyblock-' + version];
         res.render('download-version.html', { ...templateData, meta });
     });
     app.get('/download/:version/download', (req, res) => {
@@ -121,7 +161,18 @@ const main = async () => {
             if (referrerUrl.host !== host && !referrerUrl.host.includes(publicDomain))
                 res.redirect('/');
 
-            const file = path.join(downloadDistDir, version, `luckyblock-${version}.jar`);
+            const file = path.join(distDir, `luckyblock-${version}`, `luckyblock-${version}.jar`);
+            res.download(file);
+        } catch {
+            res.redirect('/');
+        }
+    });
+    app.get('/instant-download/:name', (req, res) => {
+        try {
+            const name = req.params['name'];
+            if (name.startsWith('luckyblock')) res.redirect('/');
+
+            const file = path.join(distDir, name, name);
             res.download(file);
         } catch {
             res.redirect('/');

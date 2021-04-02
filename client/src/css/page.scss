@@ -44,6 +44,10 @@ body.page {
         transition: color 0.2s;
     }
 
+    li {
+        line-height: 1.6em;
+    }
+
     .left-right {
         display: flex;
         justify-content: space-between;
