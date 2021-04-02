@@ -108,7 +108,6 @@ const main = async () => {
 
     app.set('views', [path.join(clientDir, 'dist/pages'), path.join(docsDir, 'dist')]);
     app.use(express.static(path.join(clientDir, 'dist')));
-    //app.use('/docs', express.static(path.join(docsDir, 'dist')));
 
     // handlebars engines
     app.engine('html', handlebars({ extname: 'html' }));
@@ -128,8 +127,8 @@ const main = async () => {
     app.get('/', (req, res) => {
         res.render('index.html', templateData);
     });
-    app.get('/version-log', (req, res) => {
-        res.render('version-log.txt', templateData);
+    app.get('/version-log-forge', (req, res) => {
+        res.render('version-log-forge.txt', templateData);
     });
     app.get('/info', (req, res) => {
         res.render('info.html', templateData);
@@ -178,7 +177,10 @@ const main = async () => {
 
     // compatibility
     app.get('/projects/lucky_block/download/version/version_log.txt', (req, res) => {
-        res.redirect('/version-log');
+        res.redirect('/version-log-forge');
+    });
+    app.get('/version-log', (req, res) => {
+        res.redirect('/version-log-forge');
     });
     app.get('/projects/*', (req, res) => {
         res.redirect('/');
