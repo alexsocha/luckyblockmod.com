@@ -56,16 +56,13 @@ const readDist = async (): Promise<VersionTemplateVars> => {
                     'utf-8'
                 );
                 const metaFile = jsyaml.load(metaStr) as VersionMetaFile;
-                if (metaFile.version == undefined) console.log(metaFile);
                 const meta: VersionMeta = {
                     ...metaFile,
                     datetime_str: moment(metaFile.datetime).format('YYYY-MM-DD HH:mm'),
-                    min_minecraft_version: metaFile.min_minecraft_version,
-                    min_forge_version: metaFile.min_forge_version,
-                    version: metaFile.version,
                 };
                 return [folderName, meta] as [string, VersionMeta];
-            } catch {
+            } catch (e) {
+                console.error(e);
                 return undefined;
             }
         }, distFolders)
@@ -109,17 +106,14 @@ const main = async () => {
     const publicDomain = 'luckyblockmod.com';
     const port = 8080;
 
-    app.set('views', path.join(clientDir, 'dist/pages'));
+    app.set('views', [path.join(clientDir, 'dist/pages'), path.join(docsDir, 'dist')]);
     app.use(express.static(path.join(clientDir, 'dist')));
-    app.use('/docs', express.static(path.join(docsDir, 'dist')));
+    //app.use('/docs', express.static(path.join(docsDir, 'dist')));
 
     // handlebars engines
-    const txtHbs = handlebars({
-        helpers: hbsHelpers(),
-        extname: 'txt',
-    });
     app.engine('html', handlebars({ extname: 'html' }));
-    app.engine('txt', txtHbs);
+    app.engine('txt', handlebars({ extname: 'txt' }));
+    app.engine('md', handlebars({ extname: 'md' }));
 
     let templateData = {
         ...(await readDist()),
@@ -143,13 +137,9 @@ const main = async () => {
     app.get('/download', (req, res) => {
         res.render('download.html', templateData);
     });
-    app.get('/download', (req, res) => {
-        res.render('download.html', templateData);
-    });
-    app.get('/download/:version', (req, res) => {
-        const version = req.params['version'];
-        const meta = templateData.versionMap['luckyblock-' + version];
-        res.render('download-version.html', { ...templateData, meta });
+    app.get('/download/:version-forge', (req, res) => {
+        const meta = templateData.versionMap[`luckyblock-${req.params['version']}-forge`];
+        res.render('download-forge.html', { ...templateData, meta });
     });
     app.get('/download/:version/download', (req, res) => {
         try {
@@ -167,12 +157,12 @@ const main = async () => {
             res.redirect('/');
         }
     });
-    app.get('/instant-download/:name', (req, res) => {
+    app.get('/instant-download/:name.:ext', (req, res) => {
         try {
             const name = req.params['name'];
             if (name.startsWith('luckyblock')) res.redirect('/');
 
-            const file = path.join(distDir, name, name);
+            const file = path.join(distDir, name, `${name}.${req.params['ext']}`);
             res.download(file);
         } catch {
             res.redirect('/');
@@ -182,8 +172,8 @@ const main = async () => {
     app.get('/docs', (req, res) => {
         res.render('docs.html', templateData);
     });
-    app.get('/docs/*.md', (req, res) => {
-        res.render(req.path.substring(1), templateData);
+    app.get('/docs/:path', (req, res) => {
+        res.render(req.params['path'], templateData);
     });
 
     // compatibility

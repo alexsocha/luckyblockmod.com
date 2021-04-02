@@ -78,4 +78,22 @@ pack.mcmeta
 
 ## Template add-on
 
-[Download](/LuckyBlockCustom.zip ':ignore')
+{{!-- server-side rendering --}}
+
+<table>
+    <thead>
+        <th>Version</th>
+        <th>Minecraft Version</th>
+        <th>Link</th>
+    </thead>
+    <tbody>
+        \{{#each sortedVersions.template-addon-java}}
+        <!-- prettier-ignore -->
+        <tr>
+            <td>\{{{this.version}}}</td>
+            <td>>=\{{{this.min_minecraft_version}}}</td>
+            <td><a href="/instant-download/template-addon-\{{{this.version}}}-java.zip">Download</td>
+        </tr>
+        \{{/each}}
+    </tbody>
+</table>
