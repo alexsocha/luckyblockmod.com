@@ -172,16 +172,53 @@
         .subtitle {
             text-align: center;
             line-height: 1.5em;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
+
+        .text-hr {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            font-size: 13px;
+        }
+        .text-hr::before,
+        .text-hr::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid vars.$gray;
+        }
+        .text-hr::before {
+            margin-right: 0.4em;
+        }
+        .text-hr::after {
+            margin-left: 0.4em;
+        }
+
+        .edition-subtitle {
+            margin-top: 12px;
+            color: vars.$dark-gray;
+            font-size: 15px;
+            font-weight: normal;
+
+            a {
+                color: vars.$dark-gray;
+                &:hover {
+                    color: vars.$primary-color;
+                }
+            }
+        }
+
         .version-tag {
             color: vars.$gray;
         }
 
         .coming-soon {
             font-size: 16px;
-            font-weight: bold;
             color: vars.$gray;
+        }
+
+        .btn {
+            margin-top: 16px;
         }
 
         .boxes {
@@ -194,20 +231,11 @@
             justify-content: space-between;
             padding-bottom: 75px;
         }
-        img {
-            width: 150px;
-            height: 150px;
-        }
+
         .box {
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-        .multi-btn {
-            margin-right: 10px;
-            &:last-child {
-                margin-right: 0px;
-            }
         }
     }
 }
