@@ -175,29 +175,10 @@
             margin-bottom: 8px;
         }
 
-        .text-hr {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            font-size: 13px;
-        }
-        .text-hr::before,
-        .text-hr::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid vars.$gray;
-        }
-        .text-hr::before {
-            margin-right: 0.4em;
-        }
-        .text-hr::after {
-            margin-left: 0.4em;
-        }
-
         .edition-subtitle {
-            margin-top: 12px;
+            margin-top: 10px;
             color: vars.$dark-gray;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: normal;
 
             a {
