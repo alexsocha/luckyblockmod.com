@@ -73,6 +73,7 @@ const readDist = async (): Promise<VersionTemplateVars> => {
 
     const getProjectName = (folderName: String): ProjectName => {
         if (folderName.endsWith('forge')) return 'forge';
+        if (folderName.endsWith('fabric')) return 'fabric';
         if (folderName.startsWith('template-addon') && folderName.endsWith('java'))
             return 'template-addon-java';
         if (folderName.startsWith('template-addon') && folderName.endsWith('bedrock'))
@@ -136,10 +137,16 @@ const main = async () => {
     app.get('/download', (req, res) => {
         res.render('download.html', templateData);
     });
+
     app.get('/download/:version-forge', (req, res) => {
         const meta = templateData.versionMap[`luckyblock-${req.params['version']}-forge`];
         res.render('download-forge.html', { ...templateData, meta });
     });
+    app.get('/download/:version-fabric', (req, res) => {
+        const meta = templateData.versionMap[`luckyblock-${req.params['version']}-fabric`];
+        res.render('download-fabric.html', { ...templateData, meta });
+    });
+
     app.get('/download/:version/download', (req, res) => {
         try {
             const version = req.params['version'];

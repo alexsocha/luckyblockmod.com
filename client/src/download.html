@@ -18,10 +18,23 @@
         </div>
 
         <div id="platform-tabs">
-            <!--<div class="tab-bar">
-                <button id="forge-tab-header" class="tab-header" onclick="openTab('version-tabs', 'forge-tab')">Forge</button>
-            </div>-->
-            <div class="tab-list">
+            <div class="tab-bar">
+                <button
+                    id="forge-tab-header"
+                    class="tab-header"
+                    onclick="openTab('platform-tabs', 'forge-tab')"
+                >
+                    Forge
+                </button>
+                <button
+                    id="fabric-tab-header"
+                    class="tab-header"
+                    onclick="openTab('platform-tabs', 'fabric-tab')"
+                >
+                    Fabric
+                </button>
+            </div>
+            <div class="tab-list" id="tab-list">
                 <div id="forge-tab" class="tab">
                     <table class="version-table" cellspacing="0">
                         <thead>
@@ -33,7 +46,6 @@
                                 <th>Link</th>
                             </tr>
                         </thead>
-
                         {{!-- server-side rendering --}} \{{#each sortedVersions.forge}}
                         <tr>
                             <td>\{{this.version}}</td>
@@ -45,12 +57,32 @@
                         \{{/each}}
                     </table>
                 </div>
+                <div id="fabric-tab" class="tab">
+                    <table class="version-table" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Minecraft</th>
+                                <th>Date</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        {{!-- server-side rendering --}} \{{#each sortedVersions.fabric}}
+                        <tr>
+                            <td>\{{this.version}}</td>
+                            <td>>=\{{this.min_minecraft_version}}</td>
+                            <td>\{{this.datetime_str}}</td>
+                            <td><a href="/download/\{{this.version}}-fabric/">Download</a></td>
+                        </tr>
+                        \{{/each}}
+                    </table>
+                </div>
             </div>
         </div>
     </div>
     {{> footer }}
 
     <script>
-        //openTab("platform-tabs", getQueryParam(window.location, "platform", "forge") + "-tab");
+        openTab('platform-tabs', getQueryParam(window.location, 'platform', 'forge') + '-tab');
     </script>
 </body>
