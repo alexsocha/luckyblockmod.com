@@ -10,8 +10,11 @@
 
     <div class="header-spacing">
         <div class="header left-right">
-            {{!-- server-side rendering --}}
-            <h1>Lucky Block \{{meta.version}}</h1>
+            <div>
+                {{!-- server-side rendering --}}
+                <h1>Lucky Block \{{meta.version}}</h1>
+                <p>{{this.platform-text}}</p>
+            </div>
             <div id="loading" class="center-column">
                 <div class="loader"></div>
                 <div class="wait-text">Please wait...</div>

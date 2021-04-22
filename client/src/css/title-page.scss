@@ -169,6 +169,39 @@
     }
 
     .download-section {
+        .subtitle {
+            text-align: center;
+            line-height: 1.5em;
+            margin-bottom: 8px;
+        }
+
+        .edition-subtitle {
+            margin-top: 10px;
+            color: vars.$dark-gray;
+            font-size: 16px;
+            font-weight: normal;
+
+            a {
+                color: vars.$dark-gray;
+                &:hover {
+                    color: vars.$primary-color;
+                }
+            }
+        }
+
+        .version-tag {
+            color: vars.$gray;
+        }
+
+        .coming-soon {
+            font-size: 16px;
+            color: vars.$gray;
+        }
+
+        .btn {
+            margin-top: 16px;
+        }
+
         .boxes {
             flex: 1;
             padding-top: 40px;
@@ -179,21 +212,11 @@
             justify-content: space-between;
             padding-bottom: 75px;
         }
-        img {
-            width: 150px;
-            height: 150px;
-        }
+
         .box {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-        }
-        .multi-btn {
-            margin-right: 10px;
-            &:last-child {
-                margin-right: 0px;
-            }
         }
     }
 }

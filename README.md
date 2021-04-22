@@ -48,7 +48,7 @@ upload the relevant files (see `scripts/deploy.sh`) to a webserver. Edit the `ce
 docker-compose up app webserver-http certbot
 ```
 
-to obtain an SSL certificate. Revert `docker-compose.yaml` and run
+to obtain an SSL certificate. Note that you can detach from the container with `ctrl-z`. Revert `docker-compose.yaml` and run
 
 ```
 docker-compose down

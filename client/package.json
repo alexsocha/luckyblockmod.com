@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "build": "npx webpack --config webpack.config.ts"
+        "build": "npx webpack --config webpack.config.ts",
+        "watch": "npx webpack --watch"
     },
     "devDependencies": {
         "@types/copy-webpack-plugin": "6.0.0",

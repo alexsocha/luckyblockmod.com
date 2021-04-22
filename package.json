@@ -4,11 +4,13 @@
     "private": true,
     "description": "The official Lucky Block website.",
     "scripts": {
-        "format": "npx prettier --write --ignore-path .gitignore .",
         "build": "cd server && npm run build && cd ../client && npm run build && cd ../docs && npm run build",
-        "watch-server": "nodemon --ext . --watch server --ignore dist/ --exec \"cd server && npm run build && npm run start\"",
-        "watch-client": "nodemon --ext . --watch client --ignore dist/ --exec \"cd client && npm run build\"",
-        "watch-docs": "nodemon --ext . --watch docs --ignore dist/ --exec \"cd docs && npm run build\"",
+        "start-cluster": "cd server && npx pm2 start \"dist/server.js\" --no-daemon --name app -i 2",
+        "reload-cluster": "cd server && npx pm2 reload app",
+        "format": "npx prettier --write --ignore-path .gitignore .",
+        "watch-server": "nodemon --ext . --watch server --ignore '/dist/' --exec \"cd server && npm run build && npm run start\"",
+        "watch-client": "cd client && npm run watch",
+        "watch-docs": "nodemon --ext . --watch docs --ignore '/dist/' --exec \"cd docs && npm run build\"",
         "watch": "npx concurrently \"npm run watch-server\" \"npm run watch-client\" \"npm run watch-docs\"",
         "postinstall": "cd server && npm i && cd ../client && npm i && cd ../docs && npm i"
     },

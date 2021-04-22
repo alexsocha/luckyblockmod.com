@@ -44,6 +44,10 @@ body.page {
         transition: color 0.2s;
     }
 
+    li {
+        line-height: 1.6em;
+    }
+
     .left-right {
         display: flex;
         justify-content: space-between;
@@ -71,6 +75,7 @@ body.page {
         flex: 0;
         align-items: center;
         justify-content: center;
+        display: inline-block;
 
         background-color: vars.$primary-color;
         color: white;

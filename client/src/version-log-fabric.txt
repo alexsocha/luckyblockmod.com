@@ -1,0 +1,4 @@
+{{!-- server-side rendering --}}
+{{#each sortedVersions.fabric}}
+{{#if this.version_number}}{{this.version_number}}{{else}}1000000{{/if}}|{{this.min_minecraft_version}}|["",{"text":"Lucky Block > ","color":"gold"},{"text":"A new version is available for Minecraft >={{this.min_minecraft_version}}. You can download it ","color":"gold"},{"text":"here!","color":"blue","underlined":true,"clickEvent":{"action":"open_url","value":"http://www.luckyblockmod.com/"},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Download Lucky Block","color":"blue"}]}}}]
+{{/each}}

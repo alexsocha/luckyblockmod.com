@@ -2,62 +2,100 @@ import * as R from 'ramda';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as jsyaml from 'js-yaml';
-import * as express from 'express';
-import * as handlebars from 'express-handlebars';
-import * as hbsHelpers from 'handlebars-helpers';
 import * as marked from 'marked';
 import * as semver from 'semver';
-import * as moment from 'moment';
+import express from 'express';
+import handlebars from 'express-handlebars';
+import hbsHelpers from 'handlebars-helpers';
+import moment from 'moment';
 import { promisify } from 'util';
 
 const baseDir = path.join(__dirname, '..');
 const clientDir = path.join(baseDir, '../client');
 const docsDir = path.join(baseDir, '../docs');
-const downloadDistDir = path.join(baseDir, '../../luckyblock-dist');
+const distDir = path.join(baseDir, '../../luckyblock-dist');
 
-interface RawDistMeta {
-    readonly subversion?: number;
-    readonly version?: string;
-    readonly mc_version: string;
-    readonly forge_version: string;
+interface VersionMetaFile {
+    readonly version: string;
+    readonly version_number: number;
+    readonly min_minecraft_version: string;
+    readonly min_forge_version: string;
     readonly datetime: Date;
 }
-interface DistMeta extends RawDistMeta {
-    readonly version: string;
+
+interface VersionMeta extends VersionMetaFile {
     readonly datetime_str: string;
+    readonly min_minecraft_version: string;
 }
-interface DistTemplateVars {
-    readonly versions: ReadonlyArray<DistMeta>;
-    readonly versionIndexMap: { readonly [k: string]: number };
+
+type ProjectName = 'forge' | 'fabric' | 'template-addon-java' | 'template-addon-bedrock';
+
+type VersionMap = {
+    readonly [k: string]: VersionMeta;
+};
+type SortedVersions = {
+    readonly [k in ProjectName]: ReadonlyArray<VersionMeta>;
+};
+
+interface VersionTemplateVars {
+    readonly versionMap: VersionMap;
+    readonly sortedVersions: SortedVersions;
 }
-const readDist = async (): Promise<DistTemplateVars> => {
-    const distFolders = await fs.promises.readdir(downloadDistDir).catch((err) => {
-        console.error(`${downloadDistDir} is empty`);
+
+const readDist = async (): Promise<VersionTemplateVars> => {
+    const distFolders = await fs.promises.readdir(distDir).catch((err) => {
+        console.error(`${distDir} is empty`);
         return [];
     });
 
-    const distMetas = await Promise.all(
+    const initMetas = await Promise.all(
         R.map(async (folderName) => {
-            const metaStr = await fs.promises.readFile(
-                path.join(downloadDistDir, folderName, 'meta.yaml'),
-                'utf-8'
-            );
-            const distMeta = jsyaml.safeLoad(metaStr) as RawDistMeta;
-            return {
-                ...distMeta,
-                version: distMeta.version ?? distMeta.mc_version + '-' + distMeta.subversion,
-                datetime_str: moment(distMeta.datetime).format('YYYY-MM-DD HH:mm'),
-            };
+            try {
+                const metaStr = await fs.promises.readFile(
+                    path.join(distDir, folderName, 'meta.yaml'),
+                    'utf-8'
+                );
+                const metaFile = jsyaml.load(metaStr) as VersionMetaFile;
+                const meta: VersionMeta = {
+                    ...metaFile,
+                    datetime_str: moment(metaFile.datetime).format('YYYY-MM-DD HH:mm'),
+                };
+                return [folderName, meta] as [string, VersionMeta];
+            } catch (e) {
+                console.error(e);
+                return undefined;
+            }
         }, distFolders)
     );
+    const metas = R.filter((v) => v !== undefined, initMetas) as Array<[string, VersionMeta]>;
 
-    const versions = R.sortWith([(a, b) => semver.compare(b.version, a.version)], distMetas);
-    const versionIndexMap = R.addIndex<DistMeta, {}>(R.reduce)(
-        (acc, v, i) => ({ ...acc, [v.version]: i }),
-        {},
-        versions
+    const versionMap = R.fromPairs(metas);
+
+    const getProjectName = (folderName: String): ProjectName => {
+        if (folderName.endsWith('forge')) return 'forge';
+        if (folderName.endsWith('fabric')) return 'fabric';
+        if (folderName.startsWith('template-addon') && folderName.endsWith('java'))
+            return 'template-addon-java';
+        if (folderName.startsWith('template-addon') && folderName.endsWith('bedrock'))
+            return 'template-addon-bedrock';
+        return 'forge';
+    };
+
+    const versionsByProject = R.reduceBy(
+        (acc, [_, meta]) => {
+            acc.push(meta);
+            return acc;
+        },
+        [] as Array<VersionMeta>,
+        ([folderName]) => getProjectName(folderName),
+        metas
     );
-    return { versions, versionIndexMap };
+    const sortedVersions: SortedVersions = R.map(
+        R.sortWith([(a, b) => semver.compare(b.version, a.version)]),
+        versionsByProject
+    );
+
+    return { versionMap, sortedVersions };
 };
 
 const genToken = (): string => {
@@ -69,17 +107,13 @@ const main = async () => {
     const publicDomain = 'luckyblockmod.com';
     const port = 8080;
 
-    app.set('views', path.join(clientDir, 'dist/pages'));
+    app.set('views', [path.join(clientDir, 'dist/pages'), path.join(docsDir, 'dist')]);
     app.use(express.static(path.join(clientDir, 'dist')));
-    app.use('/docs', express.static(path.join(docsDir, 'dist')));
 
     // handlebars engines
-    const txtHbs = handlebars({
-        helpers: hbsHelpers(),
-        extname: 'txt',
-    });
     app.engine('html', handlebars({ extname: 'html' }));
-    app.engine('txt', txtHbs);
+    app.engine('txt', handlebars({ extname: 'txt' }));
+    app.engine('md', handlebars({ extname: 'md' }));
 
     let templateData = {
         ...(await readDist()),
@@ -94,23 +128,30 @@ const main = async () => {
     app.get('/', (req, res) => {
         res.render('index.html', templateData);
     });
-    app.get('/version-log', (req, res) => {
-        res.render('version-log.txt', templateData);
+
+    app.get('/version-log-forge', (req, res) => {
+        res.render('version-log-forge.txt', templateData);
     });
+    app.get('/version-log-fabric', (req, res) => {
+        res.render('version-log-fabric.txt', templateData);
+    });
+
     app.get('/info', (req, res) => {
         res.render('info.html', templateData);
     });
     app.get('/download', (req, res) => {
         res.render('download.html', templateData);
     });
-    app.get('/download', (req, res) => {
-        res.render('download.html', templateData);
+
+    app.get('/download/:version-forge', (req, res) => {
+        const meta = templateData.versionMap[`luckyblock-${req.params['version']}-forge`];
+        res.render('download-forge.html', { ...templateData, meta });
     });
-    app.get('/download/:version', (req, res) => {
-        const version = req.params['version'];
-        const meta = templateData.versions[templateData.versionIndexMap[version]];
-        res.render('download-version.html', { ...templateData, meta });
+    app.get('/download/:version-fabric', (req, res) => {
+        const meta = templateData.versionMap[`luckyblock-${req.params['version']}-fabric`];
+        res.render('download-fabric.html', { ...templateData, meta });
     });
+
     app.get('/download/:version/download', (req, res) => {
         try {
             const version = req.params['version'];
@@ -121,7 +162,18 @@ const main = async () => {
             if (referrerUrl.host !== host && !referrerUrl.host.includes(publicDomain))
                 res.redirect('/');
 
-            const file = path.join(downloadDistDir, version, `luckyblock-${version}.jar`);
+            const file = path.join(distDir, `luckyblock-${version}`, `luckyblock-${version}.jar`);
+            res.download(file);
+        } catch {
+            res.redirect('/');
+        }
+    });
+    app.get('/instant-download/:name.:ext', (req, res) => {
+        try {
+            const name = req.params['name'];
+            if (name.startsWith('luckyblock')) res.redirect('/');
+
+            const file = path.join(distDir, name, `${name}.${req.params['ext']}`);
             res.download(file);
         } catch {
             res.redirect('/');
@@ -131,13 +183,16 @@ const main = async () => {
     app.get('/docs', (req, res) => {
         res.render('docs.html', templateData);
     });
-    app.get('/docs/*.md', (req, res) => {
-        res.render(req.path.substring(1), templateData);
+    app.get('/docs/:path', (req, res) => {
+        res.render(req.params['path'], templateData);
     });
 
     // compatibility
     app.get('/projects/lucky_block/download/version/version_log.txt', (req, res) => {
-        res.redirect('/version-log');
+        res.redirect('/version-log-forge');
+    });
+    app.get('/version-log', (req, res) => {
+        res.redirect('/version-log-forge');
     });
     app.get('/projects/*', (req, res) => {
         res.redirect('/');

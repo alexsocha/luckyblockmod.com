@@ -10,6 +10,7 @@ import * as glob from 'glob';
 
 const baseDir = __dirname;
 const mode = (process.env.NODE_ENV as 'production' | 'development') || 'development';
+const isProd = mode === 'production';
 
 const config: webpack.Configuration = {
     mode: mode,
@@ -39,7 +40,7 @@ const config: webpack.Configuration = {
             {
                 test: /\.scss$/,
                 use: [
-                    'file-loader?name=style.[contenthash:8].css',
+                    `file-loader?name=style${isProd ? '.[contenthash:8]' : ''}.css`,
                     'extract-loader',
                     'css-loader',
                     'sass-loader',
@@ -47,11 +48,11 @@ const config: webpack.Configuration = {
             },
             {
                 test: /\.png$/,
-                loader: 'file-loader?name=img/[name].[contenthash:8].[ext]',
+                loader: `file-loader?name=img/[name]${isProd ? '.[contenthash:8]' : ''}.[ext]`,
             },
             {
                 test: /\.ts/,
-                loader: 'file-loader?name=[name].[contenthash:8].js',
+                use: [`file-loader?name=[name]${isProd ? '.[contenthash:8]' : ''}.js`, 'ts-loader'],
             },
         ],
     },

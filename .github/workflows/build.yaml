@@ -1,10 +1,10 @@
 name: build
-on: [push]
+on: [push, pull_request]
 
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - name: Build with docker-compose
-              run: docker-compose up build
+            - name: Build with docker
+              run: ./build.sh
