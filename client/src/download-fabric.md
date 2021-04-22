@@ -12,9 +12,10 @@
 
 ## Install instructions
 
-1. Install fabric (instructions coming soon).
-2. Place the Lucky Block .jar file in your <a href="https://minecraft.gamepedia.com/.minecraft">.minecraft</a>/mods folder.
-3. Run Minecraft again, now with the Lucky Block installed.
+1. Download and run the latest <a href="https://fabricmc.net/use/">Fabric Installer</a>.
+2. Download the <a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api/files">Fabric API</a>, choosing a version compatible with Minecraft >=\{{meta.min_minecraft_version}}. Place this in your <a href="https://minecraft.gamepedia.com/.minecraft">.minecraft</a>/mods folder.
+3. Place the Lucky Block .jar file in your <a href="https://minecraft.gamepedia.com/.minecraft">.minecraft</a>/mods folder.
+4. Run Minecraft with the Lucky Block mod installed!
 
 {{/markdown}}
 {{/content}}
