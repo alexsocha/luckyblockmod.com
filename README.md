@@ -13,49 +13,46 @@ The official website and documentation of the [Lucky Block](https://github.com/a
 
 ## Development
 
-After an initial
+Install dependencies:
 
 ```
 npm install
 ```
 
-you can concurrently watch the server/client/docs on `localhost:8080` with
+You can concurrently watch the server/client/docs on `localhost:8080` with:
 
 ```
 npm run watch
-```
-
-To run the complete webserver on `localhost:80`, use
-
-```
-docker-compose up build
-docker-compose up app webserver-http
 ```
 
 ## Deploy
 
 **Initial**
 
-After building the app with
+Start by building the app:
 
 ```
-docker-compose up build
+./build.sh
 ```
 
-upload the relevant files (see `scripts/deploy.sh`) to a webserver. Edit the `certbot` service in `docker-compose.yaml` to depend on `webserver-http`. On the server, run
+Upload the files in `./dist` to a server.
+
+Replace the webserver service in `docker-compose.prod.yaml` with the non-https one in `docker-compose.yaml`, then generate an SSL certificate with:
 
 ```
-docker-compose up app webserver-http certbot
+docker-compose --file docker-compose.prod.yaml up webserver certbot
 ```
 
-to obtain an SSL certificate. Note that you can detach from the container with `ctrl-z`. Revert `docker-compose.yaml` and run
+Note that you can detach from the container with `ctrl-z`. Revert `docker-compose.prod.yaml`, and
+start the https server with:
 
 ```
 docker-compose down
-docker-compose up app webserver
+docker-compose up webserver
 ```
 
-to start the server. Finally, use `crontab -e` to schedule a task which renews the certificate every 4 days, by appending
+Finally, use `crontab -e` to schedule a task which renews the certificate every 4 days, by
+appending:
 
 ```
 0 0 */4 * * ~/luckyblock-website/scripts/ssl_renew.sh >> /var/log/cron.log 2>&1
@@ -63,7 +60,7 @@ to start the server. Finally, use `crontab -e` to schedule a task which renews t
 
 **Updates**
 
-Build the app as above, then simply run
+Build the app as above, then run:
 
 ```
 ./scripts/deploy.sh
