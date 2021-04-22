@@ -128,9 +128,14 @@ const main = async () => {
     app.get('/', (req, res) => {
         res.render('index.html', templateData);
     });
+
     app.get('/version-log-forge', (req, res) => {
         res.render('version-log-forge.txt', templateData);
     });
+    app.get('/version-log-fabric', (req, res) => {
+        res.render('version-log-fabric.txt', templateData);
+    });
+
     app.get('/info', (req, res) => {
         res.render('info.html', templateData);
     });
