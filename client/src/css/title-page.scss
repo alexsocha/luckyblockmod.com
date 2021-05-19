@@ -209,8 +209,19 @@
             padding-left: 30px;
             padding-right: 30px;
             display: flex;
-            justify-content: space-between;
             padding-bottom: 75px;
+        }
+
+        .box-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            &:first-child > div {
+                margin-right: auto;
+            }
+            &:last-child > div {
+                margin-left: auto;
+            }
         }
 
         .box {
