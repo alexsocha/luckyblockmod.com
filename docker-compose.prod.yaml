@@ -5,6 +5,11 @@ services:
         image: node:10-alpine
         container_name: app
         restart: unless-stopped
+        logging:
+            driver: json-file
+            options:
+                max-size: 200m
+                max-file: '10'
         ports:
             - 8080:8080
         environment:
@@ -17,10 +22,15 @@ services:
             - ../luckyblock-dist:/luckyblock-dist
         command: /bin/sh -c "cd app && npm run start-cluster"
 
-    webserver:
+    nginx:
         image: nginx:mainline-alpine
-        container_name: webserver
+        container_name: nginx
         restart: unless-stopped
+        logging:
+            driver: json-file
+            options:
+                max-size: 200m
+                max-file: '10'
         depends_on:
             - app
         ports:
@@ -40,8 +50,8 @@ services:
         image: certbot/certbot
         container_name: certbot
         depends_on:
-            # change this to a non-https webserver on the initial deploy
-            - webserver
+            # change this to a non-https nginx on the initial deploy
+            - nginx
         volumes:
             - ./client/dist:/var/www/html
             - ../certbot-etc:/etc/letsencrypt

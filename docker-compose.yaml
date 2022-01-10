@@ -13,7 +13,7 @@ services:
             - ../luckyblock-dist:/luckyblock-dist
 
     # use this when testing locally, and on the initial deploy (before certbot enables https)
-    webserver:
+    nginx:
         image: nginx:mainline-alpine
         depends_on:
             - app

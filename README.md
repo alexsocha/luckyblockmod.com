@@ -37,10 +37,10 @@ Start by building the app:
 
 Upload the files in `./dist` to a server.
 
-Replace the webserver service in `docker-compose.prod.yaml` with the non-https one in `docker-compose.yaml`, then generate an SSL certificate with:
+Replace the nginx service in `docker-compose.prod.yaml` with the non-https one in `docker-compose.yaml`, then generate an SSL certificate with:
 
 ```
-docker-compose --file docker-compose.prod.yaml up webserver certbot
+docker-compose --file docker-compose.prod.yaml up nginx certbot
 ```
 
 Note that you can detach from the container with `ctrl-z`. Revert `docker-compose.prod.yaml`, and
@@ -48,7 +48,7 @@ start the https server with:
 
 ```
 docker-compose down
-docker-compose up webserver
+docker-compose up nginx
 ```
 
 Finally, use `crontab -e` to schedule a task which renews the certificate every 4 days, by
