@@ -62,15 +62,15 @@ The Lucky Block (mod) is protected by Australian Copyright Law. By using the mod
 
 **You are _not_ allowed to:**
 
--   Create and distribute public modpacks using the mod.
--   Distribute the mod on other websites using any link other than <a href="/">luckyblockmod.com</a>.
+-   Distribute modpacks which include the Lucky Block on any website other than curseforge.com.
+-   Re-upload the Lucky Block on any other website.
 
 **You are allowed to, without asking for permission:**
 
--   Use the mod on your server, public or private.
--   Create youtube videos using the mod.
--   Create and distribute custom maps and mini-games using the mod, provided the mod itself is not included in the final download.
--   Create and distribute custom add-ons.
+-   Use the Lucky Block on your server, public or private.
+-   Create YouTube videos using the Lucky Block.
+-   Create and distribute custom maps and mini-games using the Lucky Block, provided the mod itself is not included in the final download.
+-   Create and distribute Custom Lucky Blocks, provided they require the original Lucky Block as a dependency.
 
 {{/markdown}}
 {{/content}}
