@@ -56,9 +56,7 @@ Additionally you can modify the 'luck' of the block (or any of the Lucky Items) 
 
 ## Author & Permissions
 
-The Lucky Block was created by <a href="https://github.com/alexsocha">Alex Socha</a>, alias PlayerInDistress.
-
-The Lucky Block (mod) is protected by Australian Copyright Law. By using the mod, you must follow the guidelines below.
+The Lucky Block (mod) was created by <a href="https://github.com/alexsocha">Alex Socha</a>, alias PlayerInDistress. The mod is protected by Australian Copyright Law. By using the mod you agree to follow the guidelines below.
 
 **You are _not_ allowed to:**
 
