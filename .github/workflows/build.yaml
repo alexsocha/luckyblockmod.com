@@ -1,10 +1,33 @@
-name: build
-on: [push, pull_request]
+name: CI
+on:
+    - push
+    - pull_request
 
 jobs:
-    build:
+    ci:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - name: Build with docker
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Build with Docker
               run: ./build.sh
+            - name: 'Deploy: Copy files'
+              if: github.ref == 'refs/heads/master'
+              uses: appleboy/scp-action@master
+              with:
+                  host: luckyblockmod.com
+                  username: ${{ secrets.USERNAME }}
+                  key: ${{ secrets.KEY }}
+                  source: ./dist/*
+                  target: /root/luckyblock-website
+                  strip_components: 1
+            - name: 'Deploy: Restart server'
+              if: github.ref == 'refs/heads/master'
+              uses: appleboy/ssh-action@master
+              with:
+                  host: luckyblockmod.com
+                  username: ${{ secrets.USERNAME }}
+                  key: ${{ secrets.KEY }}
+                  script: |
+                      cd /root/luckyblock-website
+                      docker exec -t --workdir /app app npm run reload-cluster
