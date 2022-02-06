@@ -14,7 +14,7 @@ When you open a Lucky Block, it will randomly choose one of over 100 possible ou
 
 <img class="img-box" width="50%" src="./images/luckyblock_ingame.png">
 
-## Special Items
+## Lucky Items
 
 The mod also adds three new items, which can occasionally be found in a Lucky Block.
 
@@ -26,7 +26,7 @@ The Lucky Sword usually acts as a normal sword with 6 attack damage. However, oc
 
 ### Lucky Bow
 
-The Lucky Bow shoots arrows like a normal bow. However, it will occasionally shoot various other things - examples include TNT, a lava bucket, or a large meteorite.
+The Lucky Bow shoots arrows like a normal bow. However, it will occasionally shoot other things too - examples include TNT, a lava bucket, or a large meteorite.
 
 ### Lucky Potion
 
@@ -34,7 +34,7 @@ The Lucky Potion can be thrown, and will produce a random effect on impact. This
 
 ## Natural Generation
 
-The Lucky Block will naturally spawn in your world, and accross all dimensions. It's quite rare, though slightly more likely in dimensions such as The Nether. It may also generate within special structures, indicating how positive the outcome is likely to be.
+The Lucky Block will naturally spawn in your world, and across all dimensions. It's quite rare, though slightly more common in dimensions such as The Nether. It may also generate within special structures, indicating how positive the outcome is likely to be.
 
 <div>
 <img class="img-box" width="40%" style="float: left" src="./images/spawn_acropolis.png">
@@ -43,11 +43,11 @@ The Lucky Block will naturally spawn in your world, and accross all dimensions. 
 
 ## Crafting
 
-You can craft a Lucky Blick with 8 gold ingots and a dispenser.
+You can craft a Lucky Block with 8 gold ingots and a dispenser.
 
 <img class="img-box" width="40%" src="./images/crafting_luckyblock.png">
 
-Additionally you can modify the 'luck' of the block, or any of the special items, by combining it with certain other items in a crafting table. This will skew the probability of getting positive/negative outcomes.
+Additionally you can modify the 'luck' of the block (or any of the Lucky Items) by combining it with certain other items in a crafting table. This will skew the probability of getting positive/negative outcomes.
 
 <div>
 <img class="img-box" width="40%" style="float: left" src="./images/crafting_luck_positive.png">
