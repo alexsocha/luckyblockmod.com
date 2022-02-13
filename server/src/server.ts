@@ -2,13 +2,10 @@ import * as R from 'ramda';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as jsyaml from 'js-yaml';
-import * as marked from 'marked';
 import * as semver from 'semver';
 import express from 'express';
 import handlebars from 'express-handlebars';
-import hbsHelpers from 'handlebars-helpers';
 import moment from 'moment';
-import { promisify } from 'util';
 
 const baseDir = path.join(__dirname, '..');
 const clientDir = path.join(baseDir, '../client');
@@ -43,7 +40,7 @@ interface VersionTemplateVars {
 }
 
 const readDist = async (): Promise<VersionTemplateVars> => {
-    const distFolders = await fs.promises.readdir(distDir).catch((err) => {
+    const distFolders = await fs.promises.readdir(distDir).catch(() => {
         console.error(`${distDir} is empty`);
         return [];
     });
@@ -98,10 +95,6 @@ const readDist = async (): Promise<VersionTemplateVars> => {
     return { versionMap, sortedVersions };
 };
 
-const genToken = (): string => {
-    return Math.random().toString(36).substr(2);
-};
-
 const main = async () => {
     const app = express();
     const publicDomain = 'luckyblockmod.com';
@@ -125,21 +118,21 @@ const main = async () => {
         templateData = { ...templateData, ...(await readDist()) };
     }, 1000 * 60 * 5);
 
-    app.get('/', (req, res) => {
+    app.get('/', (_, res) => {
         res.render('index.html', templateData);
     });
 
-    app.get('/version-log-forge', (req, res) => {
+    app.get('/version-log-forge', (_, res) => {
         res.render('version-log-forge.txt', templateData);
     });
-    app.get('/version-log-fabric', (req, res) => {
+    app.get('/version-log-fabric', (_, res) => {
         res.render('version-log-fabric.txt', templateData);
     });
 
-    app.get('/info', (req, res) => {
+    app.get('/info', (_, res) => {
         res.render('info.html', templateData);
     });
-    app.get('/download', (req, res) => {
+    app.get('/download', (_, res) => {
         res.render('download.html', templateData);
     });
 
@@ -180,7 +173,7 @@ const main = async () => {
         }
     });
 
-    app.get('/docs', (req, res) => {
+    app.get('/docs', (_, res) => {
         res.render('docs.html', templateData);
     });
     app.get('/docs/:path', (req, res) => {
@@ -188,13 +181,13 @@ const main = async () => {
     });
 
     // compatibility
-    app.get('/projects/lucky_block/download/version/version_log.txt', (req, res) => {
+    app.get('/projects/lucky_block/download/version/version_log.txt', (_, res) => {
         res.redirect('/version-log-forge');
     });
-    app.get('/version-log', (req, res) => {
+    app.get('/version-log', (_, res) => {
         res.redirect('/version-log-forge');
     });
-    app.get('/projects/*', (req, res) => {
+    app.get('/projects/*', (_, res) => {
         res.redirect('/');
     });
 
