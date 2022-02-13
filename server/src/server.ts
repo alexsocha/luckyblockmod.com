@@ -10,7 +10,8 @@ import moment from 'moment';
 const baseDir = path.join(__dirname, '..');
 const clientDir = path.join(baseDir, '../client');
 const docsDir = path.join(baseDir, '../docs');
-const distDir = path.join(baseDir, '../../luckyblock-dist');
+//const distDir = path.join(baseDir, '../../luckyblock-dist');
+const distDir = path.join(baseDir, '../../luckyblock/dist-new');
 
 interface VersionMetaFile {
     readonly version: string;
@@ -44,6 +45,8 @@ const readDist = async (): Promise<VersionTemplateVars> => {
         console.error(`${distDir} is empty`);
         return [];
     });
+    console.log(distDir);
+    console.log(distFolders);
 
     const initMetas = await Promise.all(
         R.map(async (folderName) => {
@@ -69,8 +72,8 @@ const readDist = async (): Promise<VersionTemplateVars> => {
     const versionMap = R.fromPairs(metas);
 
     const getProjectName = (folderName: String): ProjectName => {
-        if (folderName.endsWith('forge')) return 'forge';
-        if (folderName.endsWith('fabric')) return 'fabric';
+        if (folderName.startsWith('lucky-block-forge')) return 'forge';
+        if (folderName.startsWith('lucky-block-fabric')) return 'fabric';
         if (folderName.startsWith('template-addon') && folderName.endsWith('java'))
             return 'template-addon-java';
         if (folderName.startsWith('template-addon') && folderName.endsWith('bedrock'))
