@@ -44,8 +44,6 @@ const readDist = async (): Promise<VersionTemplateVars> => {
         console.error(`${distDir} is empty`);
         return [];
     });
-    console.log(distDir);
-    console.log(distFolders);
 
     const initMetas = await Promise.all(
         R.map(async (folderName) => {
@@ -138,12 +136,12 @@ const main = async () => {
         res.render('download.html', templateData);
     });
 
-    app.get('/download/:version-forge', (req, res) => {
-        const meta = templateData.versionMap[`luckyblock-${req.params['version']}-forge`];
+    app.get('/download/forge-:version', (req, res) => {
+        const meta = templateData.versionMap[`lucky-block-forge-${req.params['version']}`];
         res.render('download-forge.html', { ...templateData, meta });
     });
-    app.get('/download/:version-fabric', (req, res) => {
-        const meta = templateData.versionMap[`luckyblock-${req.params['version']}-fabric`];
+    app.get('/download/fabric-:version', (req, res) => {
+        const meta = templateData.versionMap[`lucky-block-fabric-${req.params['version']}`];
         res.render('download-fabric.html', { ...templateData, meta });
     });
 
@@ -157,7 +155,7 @@ const main = async () => {
             if (referrerUrl.host !== host && !referrerUrl.host.includes(publicDomain))
                 res.redirect('/');
 
-            const file = path.join(distDir, `luckyblock-${version}`, `luckyblock-${version}.jar`);
+            const file = path.join(distDir, `lucky-block-${version}`, `lucky-block-${version}.jar`);
             res.download(file);
         } catch {
             res.redirect('/');
