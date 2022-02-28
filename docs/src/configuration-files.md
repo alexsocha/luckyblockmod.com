@@ -6,10 +6,7 @@ The Lucky Block configuration files can be found in the `.minecrat/config/lucky/
 
 -   File: `properties.txt`
 
-| Name                    | Type            | Default | Description                                                                                |
-| ----------------------- | --------------- | ------- | ------------------------------------------------------------------------------------------ |
-| `doDropsOnCreativeMode` | `true`\|`false` | `false` | Whether the Lucky Block should perform functions when opened by a player in creative mode. |
-| `showUpdateMessage`     | `true`\|`false` | `true`  | Whether a chat message should be shown when a new version of the mod is available.         |
+{{> properties-table properties=properties }}
 
 ## Luck crafting
 
@@ -120,7 +117,7 @@ These properties are the same as in the [entity outcome](outcomes#entity), but a
 
 This file lists all of the available structures, and configures additional properties for each.
 
-{{> arg-table args=outcomes.structure_definition }}
+{{> properties-table properties=outcomes.structure_definition }}
 
 **Block mode**
 

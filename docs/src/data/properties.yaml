@@ -1,10 +1,17 @@
 properties:
-    - name: doDropsOnCreativeMode
+    - name: doDropsOnRightClick
+      minVersion: 11
       type: '`true`\|`false`'
       default: '`false`'
-      description: Whether the Lucky Block should perform functions when opened by a player in creative mode.
+      description: Do drops when the Lucky Block is right clicked.
+
+    - name: doDropsOnCreativeMode
+      maxVersion: 5
+      type: '`true`\|`false`'
+      default: '`false`'
+      description: Do drops when the Lucky Block is broken on creative mode.
 
     - name: showUpdateMessage
       type: '`true`\|`false`'
       default: '`false`'
-      description: Whether a chat message should be shown when a new version of the mod is available.
+      description: Show a chat message when a new version of the mod is available.

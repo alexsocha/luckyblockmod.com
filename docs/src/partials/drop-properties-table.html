@@ -6,10 +6,13 @@
         <th>Description/Examples</th>
     </thead>
     <tbody>
-        {{#each args}}
+        {{#each properties}}
         <!-- prettier-ignore -->
         <tr>
-            <td>{{{this.name}}}</td>
+            <td>{{{this.name}}}
+                {{#if this.minVersion}}<em>&ge; v{{this.minVersion}}</em>{{/if}}
+                {{#if this.maxVersion}}<em>&le; v{{this.maxVersion}}</em>{{/if}}
+            </td>
 <td class="no-p-margin">
 
 {{{this.type}}}

@@ -35,19 +35,19 @@ Hash variables allow properties to have dynamic values, which are either random 
 
 The variables can be used in most places.
 
-{{> func-table funcs=hash_vars.standard }}
+{{> template-var-table templateVars=hash_vars.standard }}
 
 ### NBT variables
 
 The variables can be used in NBT tags.
 
-{{> func-table funcs=hash_vars.nbt }}
+{{> template-var-table templateVars=hash_vars.nbt }}
 
 ### Structure variables
 
 These variables can only be used within `.luckystruct` structure files. They provide useful information about the context in which the structure is generated.
 
-{{> func-table funcs=hash_vars.structure }}
+{{> template-var-table templateVars=hash_vars.structure }}
 
 ### Cancelling
 

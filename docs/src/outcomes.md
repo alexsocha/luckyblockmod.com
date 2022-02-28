@@ -4,7 +4,7 @@
 
 These properties apply to all outcome types.
 
-{{> arg-table args=outcomes.common }}
+{{> drop-properties-table properties=outcomes.common }}
 
 ## Item
 
@@ -12,7 +12,7 @@ These properties apply to all outcome types.
 
 Drops an item.
 
-{{> arg-table args=outcomes.item }}
+{{> drop-properties-table properties=outcomes.item }}
 
 ## Block
 
@@ -20,7 +20,7 @@ Drops an item.
 
 Places a block.
 
-{{> arg-table args=outcomes.block }}
+{{> drop-properties-table properties=outcomes.block }}
 
 ## Entity
 
@@ -28,7 +28,7 @@ Places a block.
 
 Spawns an entity.
 
-{{> arg-table args=outcomes.entity }}
+{{> drop-properties-table properties=outcomes.entity }}
 
 ## Structure
 
@@ -36,7 +36,7 @@ Spawns an entity.
 
 Generates a structure, which has been [preconfigured](configuration-files#structurestxt).
 
-{{> arg-table args=outcomes.structure }}
+{{> drop-properties-table properties=outcomes.structure }}
 
 ## Command
 
@@ -44,7 +44,7 @@ Generates a structure, which has been [preconfigured](configuration-files#struct
 
 Runs a Minecraft command.
 
-{{> arg-table args=outcomes.command }}
+{{> drop-properties-table properties=outcomes.command }}
 
 ## Difficulty
 
@@ -52,7 +52,7 @@ Runs a Minecraft command.
 
 Sets the difficulty level of the world. This can be used to ensure that monsters spawn.
 
-{{> arg-table args=outcomes.difficulty }}
+{{> drop-properties-table properties=outcomes.difficulty }}
 
 ## Effect
 
@@ -60,7 +60,7 @@ Sets the difficulty level of the world. This can be used to ensure that monsters
 
 Gives a status effect to the player and/or surrounding entities.
 
-{{> arg-table args=outcomes.effect }}
+{{> drop-properties-table properties=outcomes.effect }}
 
 ### Special effect
 
@@ -74,7 +74,7 @@ Special effects are non-standard effects added by the mod.
 
 Creates an explosion.
 
-{{> arg-table args=outcomes.explosion }}
+{{> drop-properties-table properties=outcomes.explosion }}
 
 ## Fill
 
@@ -82,7 +82,7 @@ Creates an explosion.
 
 Fills an area blocks.
 
-{{> arg-table args=outcomes.fill }}
+{{> drop-properties-table properties=outcomes.fill }}
 
 ## Message
 
@@ -90,7 +90,7 @@ Fills an area blocks.
 
 Shows a message in the chat.
 
-{{> arg-table args=outcomes.message }}
+{{> drop-properties-table properties=outcomes.message }}
 
 ## Particle
 
@@ -98,7 +98,7 @@ Shows a message in the chat.
 
 Creates one or more particles.
 
-{{> arg-table args=outcomes.message }}
+{{> drop-properties-table properties=outcomes.message }}
 
 ### Special particle
 
@@ -112,7 +112,7 @@ Special particles are particles/animations which exist game by default, but don'
 
 Plays a Minecraft sound.
 
-{{> arg-table args=outcomes.sound }}
+{{> drop-properties-table properties=outcomes.sound }}
 
 ## Nothing
 
