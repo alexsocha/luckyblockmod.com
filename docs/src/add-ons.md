@@ -93,7 +93,13 @@ pack.mcmeta
             <td>\{{{this.version}}}</td>
             <td>>=\{{{this.min_minecraft_version}}}</td>
             <td><a href="/instant-download/template-addon-\{{{this.version}}}-java.zip">Download</td>
+                <!-- 1.8.9 -->
+            <td>1.8.9 Template</td>
+            <td>Minecraft version:1.8.9</td>
+            <td><a href="https://github.com/Brandonbr1/LuckyBlocks-downloads/raw/main/luckyblock1.12.2templatebyericmr_1234.zip">Download</td>
         </tr>
         \{{/each}}
     </tbody>
 </table>
+
+
