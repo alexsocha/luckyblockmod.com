@@ -96,7 +96,7 @@ pack.mcmeta
                 <!-- 1.8.9 -->
             <td>1.8.9 Template</td>
             <td>Minecraft version:1.8.9</td>
-            <td><a href="https://github.com/Brandonbr1/LuckyBlocks-downloads/raw/main/luckyblock1.12.2templatebyericmr_1234.zip">Download</td>
+            <td><a href="https://github.com/Brandonbr1/LuckyBlocks-downloads/raw/main/luckyblock1.8.9_templatebyericmr_1234.zip">Download</td>
             <!-- add 1.12.2 -->
              <td>1.12.2 Template</td>
             <td>Minecraft version:1.8.9</td>
