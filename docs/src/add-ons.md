@@ -80,20 +80,56 @@ pack.mcmeta
 
 {{!-- server-side rendering --}}
 
-<table>
-    <thead>
-        <th>Version</th>
-        <th>Minecraft Version</th>
-        <th>Link</th>
-    </thead>
-    <tbody>
-        \{{#each sortedVersions.template-addon-java}}
-        <!-- prettier-ignore -->
-        <tr>
-            <td>\{{{this.version}}}</td>
-            <td>>=\{{{this.min_minecraft_version}}}</td>
-            <td><a href="/instant-download/template-addon-\{{{this.version}}}-java.zip">Download</td>
-        </tr>
-        \{{/each}}
-    </tbody>
+<!-- CSS Code: Place this code in the document's head (between the 'head' tags) -->
+<style>
+table.GeneratedTable {
+  width: 100%;
+  background-color: #ffffff;
+  border-collapse: collapse;
+  border-width: 2px;
+  border-color: #ffcc00;
+  border-style: solid;
+  color: #000000;
+}
+
+table.GeneratedTable td, table.GeneratedTable th {
+  border-width: 2px;
+  border-color: #ffcc00;
+  border-style: solid;
+  padding: 3px;
+}
+
+table.GeneratedTable thead {
+  background-color: #ffcc00;
+}
+</style>
+
+<!-- HTML Code: Place this code in the document's body (between the 'body' tags) where the table should appear -->
+<table class="GeneratedTable">
+  <thead>
+    <tr>
+      <th>Version</th>
+      <th>Minecraft Version</th>
+      <th>Download</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.12.2</td>
+      <td>1.8.9</td>
+      <td>=>1.16</td>
+    </tr>
+    <tr>
+      <td>1.12.2</td>
+      <td>1.8.9</td>
+      <td>=> 1.16</td> 
+    </tr>
+    <tr>
+      <td> <a href="https://github.com/Brandonbr1/LuckyBlocks-downloads/raw/main/Lucky_block_addon_1.12.2_template_help_by_CS.zip">Download 1.12.2</a> </td>
+      <td> <a href="https://github.com/Brandonbr1/LuckyBlocks-downloads/raw/main/luckyblock1.8.9_templatebyericmr_1234.zip">Download 1.8.9</a> </td>
+      <td> <a href="https://github.com/Brandonbr1/LuckyBlocks-downloads/raw/main/template-addon-1-java.zip">=>1.16</a>   </td>
+    </tr>
+  </tbody>
 </table>
+<!-- Codes by Quackit.com -->
+
