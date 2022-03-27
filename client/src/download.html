@@ -46,13 +46,17 @@
                                 <th>Link</th>
                             </tr>
                         </thead>
-                        {{!-- server-side rendering --}} \{{#each sortedVersions.forge}}
+                        {{!-- server-side rendering --}} \{{#each projects.lucky-block-forge}}
                         <tr>
                             <td>\{{this.version}}</td>
-                            <td>>=\{{this.min_minecraft_version}}</td>
-                            <td>>=\{{this.min_forge_version}}</td>
-                            <td>\{{this.datetime_str}}</td>
-                            <td><a href="/download/forge-\{{this.version}}/">Download</a></td>
+                            <td>\{{this.dependencies.minecraft.formattedVersionRange}}</td>
+                            <td>\{{this.dependencies.forge.formattedVersionRange}}</td>
+                            <td>\{{this.formattedDatetime}}</td>
+                            <td>
+                                <a href="/download/lucky-block-forge/\{{this.version}}/"
+                                    >Download</a
+                                >
+                            </td>
                         </tr>
                         \{{/each}}
                     </table>
@@ -63,16 +67,22 @@
                             <tr>
                                 <th>Version</th>
                                 <th>Minecraft</th>
+                                <th>Fabric Loader</th>
                                 <th>Date</th>
                                 <th>Link</th>
                             </tr>
                         </thead>
-                        {{!-- server-side rendering --}} \{{#each sortedVersions.fabric}}
+                        {{!-- server-side rendering --}} \{{#each projects.lucky-block-fabric}}
                         <tr>
                             <td>\{{this.version}}</td>
-                            <td>>=\{{this.min_minecraft_version}}</td>
-                            <td>\{{this.datetime_str}}</td>
-                            <td><a href="/download/fabric-\{{this.version}}/">Download</a></td>
+                            <td>\{{this.dependencies.minecraft.formattedVersionRange}}</td>
+                            <td>\{{this.dependencies.fabric-loader.formattedVersionRange}}</td>
+                            <td>\{{this.formattedDatetime}}</td>
+                            <td>
+                                <a href="/download/lucky-block-fabric/\{{this.version}}/"
+                                    >Download</a
+                                >
+                            </td>
                         </tr>
                         \{{/each}}
                     </table>

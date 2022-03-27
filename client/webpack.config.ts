@@ -1,12 +1,10 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 // @ts-ignore
 import CopyPlugin from 'copy-webpack-plugin';
-import OptimizeCssPlugin from 'optimize-css-assets-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 import * as path from 'path';
 import * as webpack from 'webpack';
-import * as glob from 'glob';
 
 const baseDir = __dirname;
 const mode = (process.env.NODE_ENV as 'production' | 'development') || 'development';
@@ -27,20 +25,52 @@ const config: webpack.Configuration = {
             {
                 test: /\.(html|md)$/,
                 use: [
-                    'file-loader?name=pages/[name].html',
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'pages/[name].html',
+                        },
+                    },
                     'extract-loader',
-                    'html-loader',
+                    {
+                        loader: 'html-loader',
+                        options: {
+                            esModule: false,
+                            sources: {
+                                urlFilter: (
+                                    attribute: string,
+                                    value: string,
+                                    resourcePath: string
+                                ) => {
+                                    if (value.endsWith('.ico')) return false;
+                                    return true;
+                                },
+                            },
+                        },
+                    },
                     path.join(baseDir, 'handlebars-loader.ts'),
                 ],
             },
             {
                 test: /\.txt$/,
-                loader: 'file-loader?name=pages/[name].txt',
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'pages/[name].txt',
+                        },
+                    },
+                ],
             },
             {
                 test: /\.scss$/,
                 use: [
-                    `file-loader?name=style${isProd ? '.[contenthash:8]' : ''}.css`,
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: `style${isProd ? '.[contenthash:8]' : ''}.css`,
+                        },
+                    },
                     'extract-loader',
                     'css-loader',
                     'sass-loader',
@@ -48,16 +78,31 @@ const config: webpack.Configuration = {
             },
             {
                 test: /\.png$/,
-                loader: `file-loader?name=img/[name]${isProd ? '.[contenthash:8]' : ''}.[ext]`,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: `img/[name]${isProd ? '.[contenthash:8]' : ''}.[ext]`,
+                        },
+                    },
+                ],
             },
             {
                 test: /\.ts/,
-                use: [`file-loader?name=[name]${isProd ? '.[contenthash:8]' : ''}.js`, 'ts-loader'],
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: `[name]${isProd ? '.[contenthash:8]' : ''}.js`,
+                        },
+                    },
+                    'ts-loader',
+                ],
             },
         ],
     },
     plugins: [
-        new OptimizeCssPlugin(),
+        new CssMinimizerPlugin(),
         new CopyPlugin({
             patterns: [{ from: path.join(baseDir, 'src/static'), to: path.join(baseDir, 'dist') }],
         }),

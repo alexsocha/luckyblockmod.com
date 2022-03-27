@@ -84,15 +84,17 @@ pack.mcmeta
     <thead>
         <th>Version</th>
         <th>Minecraft Version</th>
+        <th>Lucky Block Version</th>
         <th>Link</th>
     </thead>
     <tbody>
-        \{{#each sortedVersions.template-addon-java}}
+        \{{#each projects.custom-lucky-block-java}}
         <!-- prettier-ignore -->
         <tr>
             <td>\{{{this.version}}}</td>
-            <td>>=\{{{this.min_minecraft_version}}}</td>
-            <td><a href="/instant-download/template-addon-\{{{this.version}}}-java.zip">Download</td>
+            <td>\{{{this.dependencies.minecraft.formattedVersionRange}}}</td>
+            <td>\{{{this.dependencies.lucky-block.formattedVersionRange}}}</td>
+            <td><a href="/instant-download/custom-lucky-block-java/\{{{this.version}}}">Download</td>
         </tr>
         \{{/each}}
     </tbody>
