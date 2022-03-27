@@ -12,8 +12,7 @@ import {
 const baseDir = path.join(__dirname, '..');
 const clientDir = path.join(baseDir, '../client');
 const docsDir = path.join(baseDir, '../docs');
-//const distDir = path.join(baseDir, '../../luckyblock-dist');
-const distDir = path.join(baseDir, '../../luckyblock/dist');
+const distDir = path.join(baseDir, '../../luckyblock-dist');
 
 interface TemplateVars {
     projects: SortedProjectDistMetas;
