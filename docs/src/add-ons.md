@@ -99,3 +99,28 @@ pack.mcmeta
         \{{/each}}
     </tbody>
 </table>
+
+## Template Generator
+
+<table>
+    <thead>
+        <th>Version</th>
+        <th>Minecraft Version</th>
+        <th>Lucky Block Version</th>
+        <th>Link</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1.8</td>
+            <td>1.8</td>
+            <td>1.8</td>
+            <td><a href="https://web.archive.org/web/20200609083956/http://www.minecraftascending.com/projects/lucky_block/documentation/AddonGenerator.zip">Download</td>
+        </tr>
+          <tr>
+            <td>1.12.2</td>
+            <td>1.12.2</td>
+            <td>1.12.2</td>
+            <td><a href="https://web.archive.org/web/20200609083956/http://www.minecraftascending.com/projects/lucky_block/documentation/1-11/AddonGenerator_1-11.zip">Download for 1.12.2</td>
+        </tr>
+    </tbody>
+</table>
