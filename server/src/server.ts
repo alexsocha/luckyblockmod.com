@@ -2,6 +2,7 @@ import * as path from 'path';
 import express from 'express';
 import handlebars from 'express-handlebars';
 import {
+    fromShortProjectName,
     getDistFileExtension,
     isValidProjectName,
     ProjectName,
@@ -53,8 +54,9 @@ const main = async () => {
     });
 
     app.get('/version-log-:projectName', (req, res) => {
-        const { projectName } = req.params;
-        if (isValidProjectName(projectName)) {
+        const shortProjectName = req.params.projectName;
+        const projectName = fromShortProjectName(shortProjectName);
+        if (projectName !== undefined) {
             res.render(`version-log-${projectName}.txt`, templateVars);
         } else {
             res.status(404).send();

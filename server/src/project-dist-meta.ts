@@ -123,7 +123,8 @@ const fromYaml = (projectName: ProjectName, yamlStr: string): ProjectDistMeta =>
     return {
         ...metaYaml,
         versionNumber:
-            projectName in [ProjectName.LUCKY_BLOCK_FORGE, ProjectName.LUCKY_BLOCK_FABRIC]
+            projectName === ProjectName.LUCKY_BLOCK_FORGE ||
+            projectName === ProjectName.LUCKY_BLOCK_FABRIC
                 ? getLuckyBlockVersionAsInt(metaYaml.version)
                 : 0,
         formattedDatetime: formatDate(metaYaml.datetime),
