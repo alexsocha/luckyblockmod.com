@@ -149,7 +149,8 @@ const haveMinDepsHaveChanged = (prevMeta: ProjectDistMeta, newMeta: ProjectDistM
                 : [prevDep.minExclusive!!, newDep.minExclusive!!];
 
         // if prevDepVersion < newDepVersion
-        if (parseLooseSemver(prevDepVersion)!! < parseLooseSemver(newDepVersion)!!) return true;
+        if (parseLooseSemver(prevDepVersion)!!.compare(parseLooseSemver(newDepVersion)!!) === -1)
+            return true;
 
         return false;
     }, Object.entries(newMeta.dependencies));
@@ -203,16 +204,15 @@ export const readProjectDistMetas = async (distDir: string): Promise<SortedProje
 
     // exclude versions where the minimum dependencies have not changed
     // (e.g. so that only the latest bugfix version is included)
-    const res = R.mapObjIndexed(
+    return R.mapObjIndexed(
         R.reduce((acc, meta) => {
             if (acc.length === 0) return [meta];
-            const newerMeta = acc[acc.length - 1];
 
+            const newerMeta = acc[acc.length - 1];
             if (haveMinDepsHaveChanged(meta, newerMeta)) acc.push(meta);
-            //else acc[acc.length - 1] = meta
+
             return acc;
         }, [] as ProjectDistMeta[]),
         sortedMetasByProject
     );
-    return res;
 };

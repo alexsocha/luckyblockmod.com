@@ -21,6 +21,10 @@ export const nextMajorVersion = (version: string): string => {
     return `${semanticVersion.major + 1}`;
 };
 
+const isIntegerString = (v: string): boolean => {
+    return /^-?\d+$/.test(v);
+};
+
 export const formatVersionRange = (versionRange: VersionRange): string => {
     const { minInclusive, minExclusive, maxInclusive, maxExclusive } = versionRange;
 
@@ -49,12 +53,20 @@ export const formatVersionRange = (versionRange: VersionRange): string => {
 };
 
 export const parseLooseSemver = (v: string | number): SemVer | undefined => {
-    if (typeof v === 'number') return semver.parse(String(v)) ?? undefined;
+    if (typeof v === 'number' || isIntegerString(v)) return semver.parse(`${v}.0.0`) ?? undefined;
 
+    // e.g. 3.2-1 -> 3.2.0-1
     if (v.includes('-')) {
         const [part1, part2] = v.split('-');
         if (part1.split('.').length == 2)
             return semver.parse(`${part1}.0-${part2}`, { loose: true }) ?? undefined;
+    }
+
+    // 3.g. 4.3.2.1 -> 4.3.2-1
+    const splitByDot = v.split('.');
+    if (splitByDot.length > 3) {
+        const versionWithDash = `${splitByDot.slice(0, 3).join('.')}-${splitByDot.slice(3)}`;
+        return semver.parse(versionWithDash, { loose: true }) ?? undefined;
     }
 
     return semver.parse(v, { loose: true }) ?? undefined;
