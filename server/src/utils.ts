@@ -62,9 +62,13 @@ export const parseLooseSemver = (v: string | number): SemVer | undefined => {
             return semver.parse(`${part1}.0-${part2}`, { loose: true }) ?? undefined;
     }
 
-    // 3.g. 4.3.2.1 -> 4.3.2-1
     const splitByDot = v.split('.');
-    if (splitByDot.length > 3) {
+
+    if (splitByDot.length == 2) {
+        // e.g. 3.2 -> 3.2.0
+        return semver.parse(`${splitByDot[0]}.${splitByDot[1]}.0`, { loose: true }) ?? undefined;
+    } else if (splitByDot.length > 3) {
+        // e.g. 4.3.2.1 -> 4.3.2-1
         const versionWithDash = `${splitByDot.slice(0, 3).join('.')}-${splitByDot.slice(3)}`;
         return semver.parse(versionWithDash, { loose: true }) ?? undefined;
     }
