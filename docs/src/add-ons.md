@@ -100,7 +100,7 @@ pack.mcmeta
     </tbody>
 </table>
 
-## Template Generator
+## Older Template add-on 
 
 <table>
     <thead>
@@ -120,7 +120,7 @@ pack.mcmeta
             <td>1.12.2</td>
             <td>1.12.2</td>
             <td>1.12.2</td>
-            <td><a href="https://github.com/Brandonbr1/luckyblockmod.com/raw/189122/AddonGenerator_1-11.zip">Download for 1.12.2</td>
+            <td><a href="https://github.com/Brandonbr1/luckyblockmod.com/raw/189122/LuckyBlockCustom.zip">Download for 1.12.2</td>
         </tr>
     </tbody>
 </table>
