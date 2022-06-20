@@ -114,13 +114,13 @@ pack.mcmeta
             <td>1.8</td>
             <td>1.8</td>
             <td>1.8</td>
-            <td><a href="https://github.com/alexsocha/luckyblockmod.com/raw/1269432eab9d6f4dc805b69f00723acb5504dba5/AddonGenerator.zip">Download</td>
+            <td><a href="https://github.com/Brandonbr1/luckyblockmod.com/raw/189122/LuckyBlockCustom.zip">Download</td>
         </tr>
           <tr>
             <td>1.12.2</td>
             <td>1.12.2</td>
             <td>1.12.2</td>
-            <td><a href="https://github.com/Brandonbr1/luckyblockmod.com/raw/189122/LuckyBlockCustom.zip">Download for 1.12.2</td>
+            <td><a href="https://github.com/Brandonbr1/luckyblockmod.com/raw/189122/LuckyBlockCustom_1-11.zip">Download for 1.12.2</td>
         </tr>
     </tbody>
 </table>
